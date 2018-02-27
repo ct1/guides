@@ -1,6 +1,6 @@
 # Debian + Apache2 + Django 
 
-Setup Django, Apache2, Python Tools, and mod_wsgi on Debian Linux Systems. (Debian Version 8.6 & Up)
+Setup Django, Apache2, Python Tools, and mod_wsgi on Debian Linux Systems. (Debian Version 9.4 & Up)
 
 
 1. Install Python Tools, Apache2, and Mod_WSGI on your Debian Linux System
