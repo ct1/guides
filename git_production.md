@@ -41,7 +41,7 @@ chmod +x post-receive
 The 'post-receive' file will be looked into every time a push is completed and it's saying that your files need to be in /var/www/<your-dir>.
 
 
-#### Deploy from your local Git
+### Deploy from your local Git
 Go to your project folder. Then we need to configure the remote path of our repository. Tell Git to add a remote called 'live':
 ```
 cd ~/Dev/<your-project>
