@@ -1,4 +1,4 @@
-# Setup automatic deployment with Git with a VPS
+# Setup automatic deployment with Git to a Digital Ocean droplet (VPS)
 
 How to use Git to deploy your application on Digital Ocean
 
