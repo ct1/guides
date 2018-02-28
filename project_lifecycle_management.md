@@ -6,7 +6,7 @@ Perspectives on how to organize software development
 
 ### Overall architechture
 
-![alt text](https://github.com/ct1/guides/sw_lifecycle_manag.md)
+![Scheme](./sw_lifecycle_manag.md)
  
 
 Git is used to control SW versions and control the development process.. Repository (Git branch) hierarchy
