@@ -6,6 +6,10 @@ Perspectives on how to organize software development
 
 ### Overall architechture
 
+* 'npm install jspm -g'
+* 'npm install'
+* 'npm start'
+
 ![screenshot](https://github.com/ct1/guides/sw_lifecycle_manag.md)
  
 
