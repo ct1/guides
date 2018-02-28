@@ -4,13 +4,12 @@ Perspectives on how to organize software development
 
 ----------
 
-Overall architechture
+### Overall architechture
 
-![alt text](./sw_lifecycle_manag.md)
+![alt text](https://github.com/ct1/guides/sw_lifecycle_manag.md)
  
 
 Git is used to control SW versions and control the development process.. Repository (Git branch) hierarchy
-
     ```
 	Master branch reflects what is currently in production
 	1. From master create a branch test
@@ -20,8 +19,7 @@ Git is used to control SW versions and control the development process.. Reposit
     ```
 
 ### Development team
-
-	#### Responsibilities
+#### Responsibilities
     ```
 	Individual developers are responsible for:
 	Developing new features
@@ -31,12 +29,12 @@ Git is used to control SW versions and control the development process.. Reposit
 	The development manager (or the team together), based on pull requests priorities, and project development priorities, decides on individual workplans
     ```
 
-	#### Git support
+#### Git support
     ```
 	There is one centralized (GitHub/development) repository with team commits and local repositories by individual (or features or pull request) developer
     ```
 
-	#### Operations
+#### Operations
     ```
 	Individual developers  decide on individual commits to the development repository 
 	Individual developers constantly synchronize with development repository to maintian themselves as updated as possible (apart own developments)
@@ -48,7 +46,7 @@ Git is used to control SW versions and control the development process.. Reposit
 
 ### QA team
 
-	#### Responsibilities
+#### Responsibilities
     ```
 	Testers are responsible for: 
 		Testing life cycle
@@ -59,12 +57,12 @@ Git is used to control SW versions and control the development process.. Reposit
 	The QA manager (or the team together) decides on individual workplans and, based on project developments priorities,  on SW release schedules.
     ```
 
-	#### Git support
+#### Git support
     ```
 	There is one centralized (GitHub/test) repository with team commits and local repositories by individual testers
     ```
 
-	#### Operations
+#### Operations
     ```
 	Test cycle is initiated merging the development and the testing environments
 	Test cycle ends merging the testing and the production environments
@@ -72,5 +70,4 @@ Git is used to control SW versions and control the development process.. Reposit
 	Testing activities generate pull requests (with assigned priorities)
 	Custom reports, upon evaluation, may also generate pull requests (with assigned priorities)
     ```
-
 
