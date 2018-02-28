@@ -1,4 +1,4 @@
-# Setup automatic deployment with Git to a Digital Ocean droplet (VPS)
+# Setup deployment with Git to a Digital Ocean droplet (VPS)
 
 How to use Git to deploy your application on Digital Ocean
 
@@ -15,7 +15,8 @@ git init --bare
 ``` 
 `--bare` means that our folder will have no source files, just the version control.
 
-#### Hooks
+
+### Creating your hooks file control
 Git repositories have a folder called 'hooks'. This folder contains some sample files for possible actions that you can hook and perform custom actions set by you.
 
 In our repository type
@@ -39,7 +40,8 @@ chmod +x post-receive
 ``` 
 The 'post-receive' file will be looked into every time a push is completed and it's saying that your files need to be in /var/www/<your-dir>.
 
-#### Local machine
+
+#### Deploy from your local Git
 Go to your project folder. Then we need to configure the remote path of our repository. Tell Git to add a remote called 'live':
 ```
 cd ~/Dev/<your-project>
