@@ -5,7 +5,7 @@ Configure PostgreSQL to allow remote connection and initialize data
 ----------
 
 ### 1. Create project database in remote PostgreSQL
-Login to your production server
+Login to your production server.
 ```
 ssh root@<production-server-ip-address>
 ``` 
@@ -18,12 +18,12 @@ Create database as explained [here](./django_postgresql.md). Look for topic [Cre
 By default PostgreSQL is configured to be bound to “localhost”.
 
 #### Configure postgresql.conf
-First, find where is postgresql.conf. Its location varies with postgresql version
+First, find where is postgresql.conf. Its location varies with postgresql version.
 ```
 find /etc/postgresql -name "postgresql.conf"
 /etc/postgresql/9.6/main/postgresql.conf
 ``` 
-Open postgresql.conf file
+Open postgresql.conf file.
 ```
 cd /etc/postgresql/9.6/main
 sudo nano postgresql.conf
@@ -38,7 +38,7 @@ listen_addresses = '*'
 ``` 
 
 #### Configure pg_hba.conf
-Open pg_hba.conf
+Open pg_hba.conf.
 ```
 sudo nano pg_hba.conf
 ``` 
@@ -52,7 +52,7 @@ The second entry is for IPv6 network.
 “md5” means that client needs to provide a password. If you want client to connect without password change “md5” to “trust”.
 
 
-Restart postgresql server
+Restart postgresql server.
 ```
 systemctl restart postgresql
 ``` 
@@ -76,7 +76,7 @@ Mar 01 13:58:04 debian-s-1vcpu-1gb-lon1 systemd[1]: Started PostgreSQL R
 Login to the client machine and check the remote connection.
 Replace the ip-address with your production server ip-address
 Replace database settings with your production database settings
-or use the postgres user to check connection
+or use the postgres user to check connection.
 ```
 psql -h 107.170.158.89 -U postgres
 
@@ -92,7 +92,7 @@ You should be able to see list of databases.
 ### 4. Configure remote database in pgadmin
 Open pgAdmin 4 in your local machine. Configure a remote server
 You need to have a database created for your project
-Use the database-name and database-username used in step 1
+Use the database-name and database-username used in step 1.
 ```
 On the browser tree on the left, right-click on servers
 Select create server
@@ -107,11 +107,11 @@ If connection is established you should have your remote connection configured n
 
 
 ### 5. Setup triggers for full text search tables
-If you don't need to manually create triggers for tables (e.g. full text search) skip this topic
+If you don't need to manually create triggers for tables (e.g. full text search) skip this topic.
 
-In pgAdmin 4 go to Servers/<myproj_production>/Databases/<database-name>/Schemas/public/Tables
+In pgAdmin 4 go to Servers/<myproj_production>/Databases/<database-name>/Schemas/public/Tables.
 
-For each table you need to create triggers execute their corresponding script. Example: script for table campaigns
+For each table you need to create triggers execute their corresponding script. Example: script for table campaigns.
 ```
 Right-click/Scripts/SELECT script and go to the command line. 
 ```
@@ -135,18 +135,18 @@ ON shared_campaigns FOR EACH ROW EXECUTE PROCEDURE campaigns_trigger();
 
 ### 6. Initialize database
 #### Create base geo tables
-Go to your production server
+Go to your production server.
 ```
 ssh root@<production-server-ip-address>
 ``` 
-Activate virtualenv, then go the production scripts folder
-Replace proj-name with your project name
+Activate virtualenv, then go the production scripts folder.
+Replace proj-name with your project name.
 ```
 cd /var/www
 source env/bin/activate
 cd <proj-name>/py/production
 ```
-execute script and confirm output
+execute script and confirm output.
 ```
 ./geo_loaddata.sh
 
