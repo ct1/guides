@@ -37,7 +37,7 @@ cd hooks
 Create the file 'post-receive'. Replace <your-dir> with your project production folder. Replace <master> with your emmiting repository
 ```
 cat > post-receive
-#!/bin/sh
+#!/bin/bash
 TARGET='/var/www/<your-dir>'
 GIT_DIR='/var/repo/site.git'
 BRANCH='<master>'
@@ -45,7 +45,7 @@ BRANCH='<master>'
 while read oldrev newrev ref
 do
 	# only checking out the master (or whatever branch you would like to deploy)
-	if [[ $ref = refs/heads/$BRANCH ]];
+	if [[ $ref=refs/heads/$BRANCH ]];
 	then
 		echo "Ref $ref received. Deploying ${BRANCH} branch to production..."
 		git --work-tree=$TARGET --git-dir=$GIT_DIR checkout -f
