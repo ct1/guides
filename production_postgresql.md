@@ -44,7 +44,7 @@ Open pg_hba.conf
 sudo nano pg_hba.conf
 ``` 
 Add following entry at the very end.
-Replace 0.0.0.0 by your local machine ip address (replace 0.0.0.0/0 by <your-local-ip-address>/0)
+Replace 0.0.0.0 by your local machine ip address (replace `0.0.0.0/0` by `your-local-ip-address/0`)
 ```
 host	all    all    0.0.0.0/0    md5
 host    all    all    ::/0         md5
