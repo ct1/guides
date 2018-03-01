@@ -5,15 +5,14 @@ How to use Git to deploy your application on Digital Ocean
 ----------
 
 
-
-### Install Git and create Git repository in Digital Ocean
-1. Login to your VPS from command and install Git
+### 1. Install Git and create Git repository in Digital Ocean
+Login to your VPS from command and install Git
 ```
 sudo apt-get update
 sudo apt-get install git-core
 ``` 
 
-2. Create folder to deploy to
+Create folder to deploy to
 ```
 cd /var
 mkdir repo && cd repo
@@ -23,7 +22,7 @@ git init --bare
 `--bare` means that our folder will have no source files, just the version control.
 
 
-### Add the post-receive hook
+### 2. Add the post-receive hook
 Git repositories have a folder called 'hooks'. This folder contains sample files for possible actions that you can hook and perform custom actions set by you.
 
 In our repository type
@@ -31,12 +30,12 @@ In our repository type
 ls
 ``` 
 
-3. Confirm the existance and go to 'hooks' folder:
+Confirm the existance and go to 'hooks' folder:
 ```
 cd hooks
 ``` 
 
-4. Create the file 'post-receive'. Replace <your-dir> with your project production folder. Replace <master> with your emmiting repository
+Create the file 'post-receive'. Replace <your-dir> with your project production folder. Replace <master> with your emmiting repository
 ```
 cat > post-receive
 #!/bin/sh
@@ -58,25 +57,25 @@ done
 ``` 
 When finished typing, press 'control-d' to save.
 
-5. Now, set permissions to execute this file
+Now, set permissions to execute this file
 ```
 chmod +x post-receive
 ``` 
 The 'post-receive' file will be looked into every time a push is completed and it's saying that your files need to be in /var/www/<your-dir>.
 
 
-### Add remote-repository localy
+### 3. Add remote-repository localy
 Now add this bare repository to your local system as a remote ideintified by `production`. It can also be called `staging` or `live` or `test` or ... depending on your configuration.
 
-6. Add a remote repository called 'production':
+Add a remote repository called 'production':
 ```
 cd ~/Dev/<your-project>
 git remote add production ssh://root@<your-DO-ip-address>/var/repo/site.git
 ``` 
-Here we should give the repository link and not the production folder. Make sure `/var/repo/site.git` coresponds to the name you gave in step 2.
+Here we should give the repository link and not the production folder. Make sure `/var/repo/site.git` coresponds to the name you gave in step 1.
 
-### Deploy the project to production
-7. To deploy the project, commit changes and push the master branch to the production server
+### 4. Deploy the project to production
+To deploy the project, commit changes and push the master branch to the production server
 ```
 git add .
 git commit -m "Project ready"
