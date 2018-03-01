@@ -73,7 +73,7 @@ Mar 01 13:58:04 debian-s-1vcpu-1gb-lon1 systemd[1]: Started PostgreSQL R
 
 
 ### 3. Check remote access
-Login to the client machineand check the remote connection.
+Login to the client machine and check the remote connection.
 Replace the ip-address with your production server ip-address
 Replace database settings with your production database settings
 or use the postgres user to check connection
@@ -134,7 +134,25 @@ ON shared_campaigns FOR EACH ROW EXECUTE PROCEDURE campaigns_trigger();
 
 
 ### 6. Initialize database
-Create base tables and initial data
+#### Create base geo tables
+Go to your production server
+```
+ssh root@<production-server-ip-address>
+``` 
+Activate virtualenv, then go the production scripts folder
+Replace proj-name with your project name
+```
+cd /var/www
+source env/bin/activate
+cd <proj-name>/py/production
+```
+execute script and confirm output
+```
+./geo_loaddata.sh
+
+Installed 323 object(s) from 1 fixture(s)
+```
+
 
 
 
