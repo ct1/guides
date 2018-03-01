@@ -1,4 +1,4 @@
-# Setup deployment with Git to a Digital Ocean droplet (VPS)
+# Setup deployment with Git to a VPS
 
 How to use Git to deploy your application on Digital Ocean
 
@@ -42,17 +42,17 @@ The 'post-receive' file will be looked into every time a push is completed and i
 
 
 ### Deploy from your local Git
-Go to your project folder. Then we need to configure the remote path of our repository. Tell Git to add a remote called 'live':
+In your project folder configure the remote path of our repository. Add a remote repository called 'live':
 ```
 cd ~/Dev/<your-project>
-git remote add live ssh://user@mydomain.com/var/repo/site.git
+git remote add live ssh://root@<your-DO-ip-address>/var/repo/site.git
 ``` 
 Here we should give the repository link and not the live folder
 
-To deploy our project, commit your changes and push everything to the server
+To deploy the project, commit changes and push everything to the server
 ```
 git add .
-git commit -m "My project is ready"
+git commit -m "Project ready"
 
 git push live master
 ``` 
