@@ -19,40 +19,39 @@ Create database as explained here. Look for topic [Create postgresql database](.
 By default PostgreSQL is configured to be bound to “localhost”.
 
 #### Configure postgresql.conf
-	First, find where is postgresql.conf. Its location varies with postgresql version
+First, find where is postgresql.conf. Its location varies with postgresql version
 ```
 	find /etc/postgresql -name "postgresql.conf"
 	/etc/postgresql/9.6/main/postgresql.conf
 ``` 
-
-	Open postgresql.conf file
+Open postgresql.conf file
 ```
 	cd /etc/postgresql/9.6/main
 	sudo nano postgresql.conf
 ``` 
-	Replace line
+Replace line
 ```
 	# listen_addresses = 'localhost'
 ``` 
-	with
+with
 ```
 	listen_addresses = '*'
 ``` 
 
 #### Configure pg_hba.conf
-	Open pg_hba.conf
+Open pg_hba.conf
 ```
 	sudo nano pg_hba.conf
 ``` 
-	Add following entry at the very end.
+Add following entry at the very end.
 ```
 	host	all    all    0.0.0.0/0    md5
 	host    all    all    ::/0         md5
 ``` 
-	The second entry is for IPv6 network.
-	“md5” means that client needs to provide a password. If you want client to connect without password change “md5” to “trust”.
+The second entry is for IPv6 network.
+“md5” means that client needs to provide a password. If you want client to connect without password change “md5” to “trust”.
 
-	Restart postgresql server
+Restart postgresql server
 ```
 	systemctl restart postgresql
 ``` 
