@@ -74,7 +74,7 @@ Mar 01 13:58:04 debian-s-1vcpu-1gb-lon1 systemd[1]: Started PostgreSQL R
 
 
 ### 3. Check remote access
-Login to the client machine. Check remote connection
+Login to the client machineand check the remote connection.
 Replace the ip-address with your production server ip-address
 Replace database settings with your production database settings
 or use the postgres user to check connection
@@ -91,7 +91,7 @@ You should be able to see list of databases.
 
 
 ### 4. Configure remote database in pgadmin
-Open pgadmin 4 in your local machine. Configure a remote server
+Open pgAdmin 4 in your local machine. Configure a remote server
 You need to have a database created for your project
 Use the database-name and database-username used in step 1
 ```
@@ -110,16 +110,13 @@ If connection is established you should have your remote connection configured n
 ### 5. Setup triggers for full text search tables
 If you don't need to manually create triggers for tables (e.g. full text search) skip this topic
 
-Go to Servers/<myproj_production>/Databases/<database-name>/Schemas/public/Tables
+In pgAdmin 4 go to Servers/<myproj_production>/Databases/<database-name>/Schemas/public/Tables
 
-For each table you need to create triggers execute their corresponding script
-
-Example:
-script for table campaigns
+For each table you need to create triggers execute their corresponding script. Example: script for table campaigns
 ```
-Go to the command line of the table. use right-click/Scripts/SELECT script
+Right-click/Scripts/SELECT script and go to the command line. 
 ```
-Replace default script with:
+Replace existing script with:
 ```
 DROP TRIGGER IF EXISTS tsvectorupdate ON shared_campaigns;
 DROP FUNCTION IF EXISTS campaigns_trigger();
@@ -133,9 +130,8 @@ end
 $$ LANGUAGE plpgsql;
 
 CREATE TRIGGER tsvectorupdate BEFORE INSERT OR UPDATE
-    ON shared_campaigns FOR EACH ROW EXECUTE PROCEDURE campaigns_trigger();
+ON shared_campaigns FOR EACH ROW EXECUTE PROCEDURE campaigns_trigger();
 ``` 
-
 
 
 ### 6. Initialize database
