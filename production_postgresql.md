@@ -8,11 +8,10 @@ Configure PostgreSQL to allow remote connection and initialize data
 Login to your production server
 ```
 ssh root@<production-server-ip-address>
-
 ``` 
 
 #### Create postgresql database
-Create database as explained here. Look for topic [Create postgresql database](./django_postgresql.md)
+Create database as explained [here](./django_postgresql.md). Look for topic [Create postgresql database](./django_postgresql.md)
 
 
 ### 2. Configure PostgreSQL  to allow remote connection
