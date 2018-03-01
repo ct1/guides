@@ -102,7 +102,6 @@ Setup Django, Apache2, Python Tools, and mod_wsgi on Debian Linux Systems. (Debi
     sudo apachectl restart
     sudo service apache2 restart
 
-
     # Start Apache in two different ways:
     sudo apachectl start
     sudo service apache2 start
