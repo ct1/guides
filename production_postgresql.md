@@ -44,12 +44,14 @@ Open pg_hba.conf
 sudo nano pg_hba.conf
 ``` 
 Add following entry at the very end.
+Replace 0.0.0.0 by your local machine ip address (replace 0.0.0.0/0 by <your-local-ip-address>/0)
 ```
 host	all    all    0.0.0.0/0    md5
 host    all    all    ::/0         md5
 ``` 
 The second entry is for IPv6 network.
 “md5” means that client needs to provide a password. If you want client to connect without password change “md5” to “trust”.
+
 
 Restart postgresql server
 ```
