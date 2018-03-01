@@ -5,8 +5,15 @@ How to use Git to deploy your application on Digital Ocean
 ----------
 
 
-### Creating our Repository in Digital Ocean
-1. Login to your VPS from command line and type the following
+
+### Installing Git and Creating our Repository in Digital Ocean
+1. Login to your VPS from command and install Git
+```
+sudo apt-get update
+sudo apt-get install git-core
+``` 
+
+2. Create Git folder to deploy to
 ```
 cd /var
 mkdir repo && cd repo
@@ -16,46 +23,64 @@ git init --bare
 `--bare` means that our folder will have no source files, just the version control.
 
 
-### Creating your hooks file control
-Git repositories have a folder called 'hooks'. This folder contains some sample files for possible actions that you can hook and perform custom actions set by you.
+### Add the post-receive hook
+Git repositories have a folder called 'hooks'. This folder contains sample files for possible actions that you can hook and perform custom actions set by you.
 
 In our repository type
 ```
 ls
 ``` 
-You will see a few files and folders, including the 'hooks' folder. So let's go to 'hooks' folder:
+
+3. Confirm the existance and go to 'hooks' folder:
 ```
 cd hooks
 ``` 
-Now, create the file 'post-receive'. Replace <your-dir> with your project production folder
+
+4. Create the file 'post-receive'. Replace <your-dir> with your project production folder
 ```
 cat > post-receive
 #!/bin/sh
-git --work-tree=/var/www/<your-dir> --git-dir=/var/repo/site.git checkout -f
+TARGET='/var/www/<your-dir>'
+GIT_DIR='/var/repo/site.git'
+BRANCH="master"
+
+while read oldrev newrev ref
+do
+	# only checking out the master (or whatever branch you would like to deploy)
+	if [[ $ref = refs/heads/$BRANCH ]];
+	then
+		echo "Ref $ref received. Deploying ${BRANCH} branch to production..."
+		git --work-tree=$TARGET --git-dir=$GIT_DIR checkout -f
+	else
+		echo "Ref $ref received. Doing nothing: only the ${BRANCH} branch may be deployed on this server."
+	fi
+done
 ``` 
 When finished typing, press 'control-d' to save.
-Now, set the proper permissions to execute the file
+
+5. Now, set the proper permissions to execute the file
 ```
 chmod +x post-receive
 ``` 
 The 'post-receive' file will be looked into every time a push is completed and it's saying that your files need to be in /var/www/<your-dir>.
 
 
-### Deploy from your local Git
-In your project folder configure the remote path of our repository. Add a remote repository called 'live':
+### Add remote-repository localy
+Now add this bare repository to your local system as a remote ideintified by `production`. It can also be called "staging" or "live" or "test" depending on your configuration.
+
+6. Add a remote repository called 'production':
 ```
 cd ~/Dev/<your-project>
-git remote add live ssh://root@<your-DO-ip-address>/var/repo/site.git
+git remote add production ssh://root@<your-DO-ip-address>/var/repo/site.git
 ``` 
-Here we should give the repository link and not the live folder
+Here we should give the repository link and not the production folder. Make sure `/var/repo/site.git` coresponds to the name you gave in step 2.
 
-To deploy the project, commit changes and push everything to the server
+### Deploy the project to production
+7. To deploy the project, commit changes and push the master branch to the production server
 ```
 git add .
 git commit -m "Project ready"
 
-git push live master
+git push production master
 ``` 
-
-
 
