@@ -2,10 +2,7 @@
 
 How to use Git to deploy your application on Digital Ocean
 
-
 ----------
-
-
 
 ### 1. Install Git and create Git repository in Digital Ocean
 Login to your VPS from command and install Git
