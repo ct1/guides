@@ -2,7 +2,9 @@
 
 How to use Git to deploy your application on Digital Ocean
 
+
 ----------
+
 
 
 ### 1. Install Git and create Git repository in Digital Ocean
