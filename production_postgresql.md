@@ -20,45 +20,45 @@ By default PostgreSQL is configured to be bound to “localhost”.
 
 #### Configure postgresql.conf
 	First, find where is postgresql.conf. Its location varies with postgresql version
-	```
+```
 	find /etc/postgresql -name "postgresql.conf"
 	/etc/postgresql/9.6/main/postgresql.conf
-	``` 
+``` 
 
 	Open postgresql.conf file
-	```
+```
 	cd /etc/postgresql/9.6/main
 	sudo nano postgresql.conf
-	``` 
+``` 
 	Replace line
-	```
+```
 	# listen_addresses = 'localhost'
-	``` 
+``` 
 	with
-	```
+```
 	listen_addresses = '*'
-	``` 
+``` 
 
 #### Configure pg_hba.conf
 	Open pg_hba.conf
-	```
+```
 	sudo nano pg_hba.conf
-	``` 
+``` 
 	Add following entry at the very end.
-	```
+```
 	host	all    all    0.0.0.0/0    md5
 	host    all    all    ::/0         md5
-	``` 
+``` 
 	The second entry is for IPv6 network.
 	“md5” means that client needs to provide a password. If you want client to connect without password change “md5” to “trust”.
 
 	Restart postgresql server
-	```
+```
 	systemctl restart postgresql
-	``` 
+``` 
 
 #### Confirm service active
-	```
+```
 	systemctl status postgresql
 
 	* postgresql.service - PostgreSQL RDBMS
@@ -69,7 +69,7 @@ By default PostgreSQL is configured to be bound to “localhost”.
 
 	Mar 01 13:58:04 debian-s-1vcpu-1gb-lon1 systemd[1]: Starting PostgreSQL 
 	Mar 01 13:58:04 debian-s-1vcpu-1gb-lon1 systemd[1]: Started PostgreSQL R
-	``` 
+``` 
 
 
 ### 3. Check remote access
