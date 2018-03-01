@@ -40,7 +40,7 @@ cat > post-receive
 #!/bin/sh
 TARGET='/var/www/<your-dir>'
 GIT_DIR='/var/repo/site.git'
-BRANCH=<master>
+BRANCH='<master>'
 
 while read oldrev newrev ref
 do
