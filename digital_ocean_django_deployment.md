@@ -66,41 +66,41 @@ Type `yes` then hit `enter`
 ### 5. SSH & install postgresql
 
 Execute the following commands
-```
+    ```
     sudo apt-get update
     sudo apt-get install postgresql-9.6 postgresql-client-9.6 postgis
     sudo apt-get install postgis
-```
+    ```
 
 Check the installation
-```
+    ```
     ps -ef | grep postgre
-```
+    ```
     You should see something like this on the terminal:
-```
+    ```
     postgres 32164     1  0 21:58 ?        00:00:00 /usr/lib/postgresql/9.4/bin/postgres -D /var/lib/   postgresql/9.4/main -c config_file=/etc/postgresql/9.4/main/postgresql.conf
     postgres 32166 32164  0 21:58 ?        00:00:00 postgres: checkpointer process
     postgres 32167 32164  0 21:58 ?        00:00:00 postgres: writer process
     postgres 32168 32164  0 21:58 ?        00:00:00 postgres: wal writer process
     postgres 32169 32164  0 21:58 ?        00:00:00 postgres: autovacuum launcher process
     postgres 32170 32164  0 21:58 ?        00:00:00 postgres: stats collector process
-``` 
+    ``` 
 
 Log as postgres and check psql is working
-```
+    ```
     su - postgres
     psql
-```
-    You should see something like this on the terminal:
-```
+    ```
+You should see something like this on the terminal:
+    ```
     psql (9.6.2)
     Type "help" for help.
 
     postgres=#
-``` 
+    ``` 
 
 Create database and user. Replace `projname` with the settings of your database
-```
+    ```
     dropdb <projname>
     dropuser <projname>user
 
@@ -110,43 +110,44 @@ Create database and user. Replace `projname` with the settings of your database
 
     # create postgis extension to handle geometry data
     psql -d <projname> -c "CREATE EXTENSION postgis;"
-```
+    ```
 
 Run the following:
-```
+    ```
     cd /var/www/env/
     source bin/activate
     cd ../<your-project>
     python manage.py makemigrations
     python manage.py migrate
-```
+    ```
 
 
 
 ### 6. Install other applications if required
 
-10. If required zbar need to install development packages 
-```
+If required zbar need to install development packages 
+    ```
      sudo apt-get install libzbar-dev python3-dev
-``` 
+    ``` 
 
 
 ### 7. FTP Local Django Project to Digital Ocean
 
-1. Open an FTP Client (like Transmit or Cyberduck)
+Open an FTP Client (like Transmit or Cyberduck)
 
-2. SFTP into your `<ip_address>` using `root` and your `password`
+SFTP into your `<ip_address>` using `root` and your `password`
 
-11. Navigate to `/var/www`
+Navigate to `/var/www`
 
-12. Navigate to `<your-project>/django_proj/settings/` and remove `local.py`
+Navigate to `<your-project>/django_proj/settings/` and remove `local.py`
 
-13. Open Terminal/PuTTY
+Open Terminal/PuTTY
 
-14. SSH into your `<ip_address>` like `ssh root@<ip_address>` 
+SSH into your `<ip_address>` like `ssh root@<ip_address>` 
 
-15. Update Apache2 to your project's name/settings if needed.
+Update Apache2 to your project's name/settings if needed.
 
-10. Restart apache `sudo service apache2 restart`
+Restart apache `sudo service apache2 restart`
 
-11. Navigate to your `<ip_address>` (or domain name) in your browser.
+Navigate to your `<ip_address>` (or domain name) in your browser.
+
