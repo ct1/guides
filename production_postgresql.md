@@ -89,7 +89,7 @@ postgres=# \l
 You should be able to see list of databases.
 
 
-### 4. Configure remote database in pgadmin
+### 4. Configure remote database in pgAdmin
 Open pgAdmin 4 in your local machine. Configure a remote server
 You need to have a database created for your project
 Use the database-name and database-username used in step 1.
@@ -134,6 +134,8 @@ ON shared_campaigns FOR EACH ROW EXECUTE PROCEDURE campaigns_trigger();
 
 
 ### 6. Initialize database
+Initial content is created executing scripts in the production server (not in the other environments)
+
 #### Create base geo tables
 Go to your production server.
 ```
@@ -148,11 +150,15 @@ cd <proj-name>/py/production
 ```
 execute script and confirm output.
 ```
-./geo_loaddata.sh
+./1-loaddata_geo.sh
 
 Installed 323 object(s) from 1 fixture(s)
 ```
 
 
-
+### NOTE: In case you want to completely remove postgresql from your server do
+```
+sudo apt-get purge 'postgresql-*'
+sudo apt-get autoremove 'postgresql-*'
+```
 
