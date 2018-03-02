@@ -7,7 +7,7 @@ A installation guide for getting Django setup on Digital Ocean
 
 ### 1. Digital Ocean Setup
 
-    Sign up for a Digital Ocean account (https://www.digitalocean.com/)
+Sign up for a Digital Ocean account (https://www.digitalocean.com/)
 
 Login
 Create Droplet
