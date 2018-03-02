@@ -6,25 +6,25 @@ A installation guide for getting Django setup on Digital Ocean
 
 
 ### 1. Digital Ocean Setup
-  Sign up for a Digital Ocean account (https://www.digitalocean.com/)
 
-  Login
+    Sign up for a Digital Ocean account (https://www.digitalocean.com/)
 
-  Create Droplet
+Login
+Create Droplet
 
-  Under `Distributions` select `Debian` version `9.3 x64` or newer.
+Under `Distributions` select `Debian` version `9.3 x64` or newer.
 
-  Choose a size in your budget
+Choose a size in your budget
 
-  Choose a `datacenter region` likely one close to your target audience
+Choose a `datacenter region` likely one close to your target audience
 
-  Leave out SSH Key unless you know how to create one.
+Leave out SSH Key unless you know how to create one.
 
-  Finalize and create: 1 Droplet is fine
+Finalize and create: 1 Droplet is fine
 
-  Let Droplet finish initializing
+Let Droplet finish initializing
 
-  Check email for the following (unless you setup an SSH Key on step #7):
+Check email for the following (unless you setup an SSH Key on step #7):
 
 ```
 Droplet Name: <droplet_name>
