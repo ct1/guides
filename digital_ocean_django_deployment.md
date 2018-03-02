@@ -37,20 +37,20 @@ Password: <password>
 #### 2. Digital Ocean & Terminal/PuTTY
 
 1. In terminal([PuTTY](http://www.putty.org/) if on Windows) and enter:
-     ```
+    ```
      # format
      ssh root@<ip_address>
 
      #example:
      ssh root@104.131.146.34
-     ```
+    ```
 
 2. You should see a message like:
-```
-The authenticity of host '104.131.146.34 (104.131.146.34)' can't be established.
-ECDSA key fingerprint is SHA256:Dg4o2zcwBMMx72IJEgdhJm/iDWtoQzWVmSuRV8B4db4.
-Are you sure you want to continue connecting (yes/no)?   
-```
+    ```
+    The authenticity of host '104.131.146.34 (104.131.146.34)' can't be established.
+    ECDSA key fingerprint is SHA256:Dg4o2zcwBMMx72IJEgdhJm/iDWtoQzWVmSuRV8B4db4.
+    Are you sure you want to continue connecting (yes/no)?   
+    ```
 Type `yes` then hit `enter`
 
 3. It should ask for your `<password>`, we recevied in our email (unless you setup an SSH Key)
