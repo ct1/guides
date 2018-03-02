@@ -71,7 +71,7 @@ From now on, use this `<new_password>` with `ssh root@<ip_address>` to acccess y
 1. Execute the following commands
     ```
     sudo apt-get update
-    sudo apt-get install postgresql-9.6 postgresql-client-9.6 postgis
+    sudo apt-get install postgresql-9.6 postgresql-client-9.6 postgresql-9.6-postgis-2.3 -f
     ```
 
 2. Check the installation
