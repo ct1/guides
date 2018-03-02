@@ -40,7 +40,7 @@ with
   ``` 
 
 #### Configure pg_hba.conf
-Open pg_hba.conf.
+Open pg_hba.conf in the same folder
   ```
   sudo nano pg_hba.conf
   ``` 
@@ -95,7 +95,8 @@ or use the postgres user to check connection.
 
 
 ### 4. Configure remote database in pgAdmin
-Open pgAdmin 4 in your local machine. Configure a remote server
+1. Open pgAdmin 4 in your local machine.
+2. Configure a remote server
 You need to have a database created for your project
 Use the database-name and database-username used in step 1.
   ```
@@ -108,7 +109,7 @@ Use the database-name and database-username used in step 1.
   		introduce maintenance database <database-name>
   		introduce Username <database-username>
   ``` 
-If connection is established you should have your remote connection configured now.
+  If connection is established you should have your remote connection configured now.
 
 
 ### 5. Setup triggers for full text search tables
