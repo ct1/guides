@@ -72,7 +72,6 @@ From now on, use this `<new_password>` with `ssh root@<ip_address>` to acccess y
     ```
     sudo apt-get update
     sudo apt-get install postgresql-9.6 postgresql-client-9.6 postgis
-    sudo apt-get install postgis
     ```
 
 2. Check the installation
@@ -96,11 +95,15 @@ From now on, use this `<new_password>` with `ssh root@<ip_address>` to acccess y
     ```
     You should see something like this on the terminal:
     ```
-    psql (9.6.2)
+    psql (9.6.6)
     Type "help" for help.
 
     postgres=#
     ``` 
+    Leave psql
+    ```
+    \q
+    ```
 
 4. Create database and user. Replace `projname` with the settings of your database
     ```
