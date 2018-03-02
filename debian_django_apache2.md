@@ -34,6 +34,8 @@ Setup Django, Apache2, Python Tools, and mod_wsgi on Debian Linux Systems. (Debi
 
     pip install django==1.11.6
 
+    cd ..
+
     mkdir <projname> && cd <projname>
 
     django-admin.py startproject django_proj .
