@@ -18,38 +18,33 @@ Setup Django, Apache2, Python Tools, and mod_wsgi on Debian Linux Systems. (Debi
     ```
 
 2. Start Virtualenv & Django Project
-
     ```
     sudo pip install virtualenv 
-
     cd /var/www
-
-    mkdir env && cd env
-
-    virtualenv -p python3 .
-
-    source bin/activate
-
-    python --version #should return Python 3.4
-
-    pip install django==1.11.6
-
-    cd ..
-
+    ```
+    Create project folder and virtual envirenment
+    ```
     mkdir <projname> && cd <projname>
-
-    django-admin.py startproject django_proj .
-
+    virtualenv -p python3 env
+    source env/bin/activate
+    python --version    #should return Python 3.5
+    ```
+    Install django and create django project
+    ```
+    pip install django==1.11.6
+    django-admin.py startproject <projname> .
+    cd <projname>
+    ```
+    Create the database and a superuser
+    ```
     python manage.py migrate
-
     python manage.py createsuperuser 
     ```
 
 3. Setup Static & Media Root directories.
     ```
-    cd /var/www
-    
-    mkdir static-root && mkdir media-root
+    cd /var/www/<projname>
+    mkdir static && mkdir media
     ```
 
 4. Open `sudo nano /etc/apache2/sites-available/000-default.conf`
@@ -62,26 +57,25 @@ Setup Django, Apache2, Python Tools, and mod_wsgi on Debian Linux Systems. (Debi
     ServerName localhost
     ServerAdmin webmaster@localhost
 
-    Alias /static /var/www/static-root
-    <Directory /var/www/static-root>
+    Alias /static /var/www/<projname>/static
+    <Directory /var/www/<projname>/static>
        Require all granted
      </Directory>
 
-    Alias /media /var/www/media-root
-    <Directory /var/www/media-root>
+    Alias /media /var/www/<projname>/media
+    <Directory /var/www/<projname>/media>
        Require all granted
     </Directory>
 
-    <Directory /var/www/<projname>/django_proj>
+    <Directory /var/www/<projname>/<projname>>
         <Files wsgi.py>
             Require all granted
         </Files>
     </Directory>
 
-    WSGIDaemonProcess <projname> python-path=/var/www/<projname>/:/var/www/env/lib/python3.5/site-packages
+    WSGIDaemonProcess <projname> python-path=/var/www/<projname> python-home=/var/www/<projname>/<projname>
     WSGIProcessGroup <projname>
-    WSGIScriptAlias / /var/www/<projname>/django_proj/wsgi.py
-
+    WSGIScriptAlias / /var/www/<projname>/<projname>/wsgi.py
 
     ErrorLog ${APACHE_LOG_DIR}/error.log
     CustomLog ${APACHE_LOG_DIR}/access.log combined
@@ -92,10 +86,9 @@ Setup Django, Apache2, Python Tools, and mod_wsgi on Debian Linux Systems. (Debi
 
 6. Add User Permissions (to modify sqlite3 Database)
     ```
-    sudo adduser $USER www-data
-    sudo chown www-data:www-data /var/www/<projname>    
-    sudo chown www-data:www-data /var/www/<projname>/db.sqlite3
-    sudo chmod -R 775 /var/www/env/
+    chmod 664 ~/<projname>/db.sqlite3
+    sudo chown :www-data ~/<projname>/db.sqlite3
+    sudo chown :www-data ~/<projname>
     ```
 
 7. Start, Stop, Restart Apache2
@@ -130,9 +123,9 @@ Setup Django, Apache2, Python Tools, and mod_wsgi on Debian Linux Systems. (Debi
     Add Static + Media Settings
     ```
     STATIC_URL = '/static/'
-    STATIC_ROOT = '/var/www/static-root/'
+    STATIC_ROOT = '/var/www/<projname>/static/'
     MEDIA_URL = '/media/'
-    MEDIA_ROOT = '/var/www/media-root/'
+    MEDIA_ROOT = '/var/www/<projname>/media/'
     ```
 
 10. Restart Apache (see Step 7)

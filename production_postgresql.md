@@ -44,6 +44,14 @@ Open pg_hba.conf in the same folder
   ```
   sudo nano pg_hba.conf
   ``` 
+Replace line
+  ```
+  # listen_addresses = 'localhost'
+  ``` 
+with
+  ```
+  listen_addresses = '*'
+  ``` 
 Add following entry at the very end.
 Replace 0.0.0.0 by your local machine ip address (replace `0.0.0.0/0` by `your-local-ip-address/0`)
   ```
