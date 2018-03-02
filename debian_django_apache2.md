@@ -42,7 +42,6 @@ Setup Django, Apache2, Python Tools, and mod_wsgi on Debian Linux Systems. (Debi
 
 3. Setup Static & Media Root directories.
     ```
-    cd /var/www/<projname>
     mkdir static && mkdir media
     ```
 
