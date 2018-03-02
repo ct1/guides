@@ -23,9 +23,7 @@ A installation guide for getting Django setup on Digital Ocean
 
 * Finalize and create: 1 Droplet is fine
 
-Let Droplet finish initializing
-
-Check email for the following (unless you setup an SSH Key on step #7):
+Let Droplet finish initializing. Check email for the following (unless you setup an SSH Key on step #7):
 
 ```
 Droplet Name: <droplet_name>
