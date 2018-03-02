@@ -13,19 +13,19 @@ A installation guide for getting Django setup on Digital Ocean
 
 * Create Droplet
 
-Under `Distributions` select `Debian` version `9.3 x64` or newer.
+* Under `Distributions` select `Debian` version `9.3 x64` or newer.
 
-Choose a size in your budget
+* Choose a size in your budget
 
-Choose a `datacenter region` likely one close to your target audience
+* Choose a `datacenter region` likely one close to your target audience
 
-Leave out SSH Key unless you know how to create one.
+* Leave out SSH Key unless you know how to create one.
 
-Finalize and create: 1 Droplet is fine
+* Finalize and create: 1 Droplet is fine
 
-Let Droplet finish initializing
+* Let Droplet finish initializing
 
-Check email for the following (unless you setup an SSH Key on step #7):
+* Check email for the following (unless you setup an SSH Key on step #7):
 
 ```
 Droplet Name: <droplet_name>
@@ -134,9 +134,9 @@ If required zbar need to install development packages
 
 ### 7. FTP Local Django Project to Digital Ocean
 
-Open an FTP Client (like Transmit or Cyberduck)
++ Open an FTP Client (like Transmit or Cyberduck)
 
-SFTP into your `<ip_address>` using `root` and your `password`
++ SFTP into your `<ip_address>` using `root` and your `password`
 
 Navigate to `/var/www`
 
