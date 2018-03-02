@@ -73,7 +73,7 @@ Setup Django, Apache2, Python Tools, and mod_wsgi on Debian Linux Systems. (Debi
         </Files>
     </Directory>
 
-    WSGIDaemonProcess <projname> python-path=/var/www/<projname> python-home=/var/www/<projname>/<projname>
+    WSGIDaemonProcess <projname> python-path=/var/www/<projname> python-home=/var/www/<projname>/env
     WSGIProcessGroup <projname>
     WSGIScriptAlias / /var/www/<projname>/<projname>/wsgi.py
 
