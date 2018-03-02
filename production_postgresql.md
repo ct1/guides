@@ -97,9 +97,9 @@ or use the postgres user to check connection.
 ### 4. Configure remote database in pgAdmin
 1. Open pgAdmin 4 in your local machine.
 
-2. Configure a remote server
-You need to have a database created for your project
-Use the database-name and database-username used in step 1.
+2. Configure a remote server.
+  You need to have a database created for your project.
+  Use the database-name and database-username used in step 1.
   ```
   On the browser tree on the left, right-click on servers
   Select create server
