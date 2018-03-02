@@ -52,7 +52,7 @@ Password: <password>
     ```
     Type `yes` then hit `enter`
 
-3. It should ask for your `<password>`, we recevied in our email (unless you setup an SSH Key)
+3. It should ask for your `<password>`, we received in our email (unless you setup an SSH Key)
 
 4. It will ask for your `<password>` again so you can reset it. Set a `<new_password>` and then confirm it. From now on, use this `<new_password>` with `ssh root@<ip_address>` to acccess your `Droplet`.
  
