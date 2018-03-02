@@ -85,12 +85,12 @@ Type `yes` then hit `enter`
     postgres 32170 32164  0 21:58 ?        00:00:00 postgres: stats collector process
     ``` 
 
-Log as postgres and check psql is working
+    Log as postgres and check psql is working
     ```
     su - postgres
     psql
     ```
-You should see something like this on the terminal:
+    You should see something like this on the terminal:
     ```
     psql (9.6.2)
     Type "help" for help.
