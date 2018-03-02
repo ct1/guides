@@ -65,11 +65,14 @@ Type `yes` then hit `enter`
 ### 5. SSH & install postgresql
 
 Execute the following commands
-     ```
+    ```
     sudo apt-get update
     sudo apt-get install postgresql-9.6 postgresql-client-9.6 postgis
     sudo apt-get install postgis
-     ```
+    ```
+
+
+
 
 Check the installation
     ```
