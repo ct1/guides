@@ -50,7 +50,7 @@ Password: <password>
     ECDSA key fingerprint is SHA256:Dg4o2zcwBMMx72IJEgdhJm/iDWtoQzWVmSuRV8B4db4.
     Are you sure you want to continue connecting (yes/no)?   
     ```
-Type `yes` then hit `enter`
+    Type `yes` then hit `enter`
 
 3. It should ask for your `<password>`, we recevied in our email (unless you setup an SSH Key)
 
@@ -85,7 +85,7 @@ Type `yes` then hit `enter`
     postgres 32170 32164  0 21:58 ?        00:00:00 postgres: stats collector process
     ``` 
 
-    Log as postgres and check psql is working
+3. Log as postgres and check psql is working
     ```
     su - postgres
     psql
@@ -98,7 +98,7 @@ Type `yes` then hit `enter`
     postgres=#
     ``` 
 
-3. Create database and user. Replace `projname` with the settings of your database
+4. Create database and user. Replace `projname` with the settings of your database
     ```
     dropdb <projname>
     dropuser <projname>user
@@ -111,7 +111,7 @@ Type `yes` then hit `enter`
     psql -d <projname> -c "CREATE EXTENSION postgis;"
     ```
 
-4. Create django models in database
+5. Create django models in database
     ```
     cd /var/www/env/
     source bin/activate
@@ -132,21 +132,21 @@ If required zbar need to install development packages
 
 ### 7. FTP Local Django Project to Digital Ocean
 
-+ Open an FTP Client (like Transmit or Cyberduck)
+1. Open an FTP Client (like Transmit or Cyberduck)
 
-+ SFTP into your `<ip_address>` using `root` and your `password`
+2. SFTP into your `<ip_address>` using `root` and your `password`
 
-Navigate to `/var/www`
+3. Navigate to `/var/www`
 
-Navigate to `<your-project>/django_proj/settings/` and remove `local.py`
+4. Navigate to `<your-project>/django_proj/settings/` and remove `local.py`
 
-Open Terminal/PuTTY
+5. Open Terminal/PuTTY
 
-SSH into your `<ip_address>` like `ssh root@<ip_address>` 
+6. SSH into your `<ip_address>` like `ssh root@<ip_address>` 
 
-Update Apache2 to your project's name/settings if needed.
+7. Update Apache2 to your project's name/settings if needed.
 
-Restart apache `sudo service apache2 restart`
+8. Restart apache `sudo service apache2 restart`
 
-Navigate to your `<ip_address>` (or domain name) in your browser.
+9. Navigate to your `<ip_address>` (or domain name) in your browser.
 
