@@ -7,21 +7,21 @@ A installation guide for getting Django setup on Digital Ocean
 
 ### 1. Digital Ocean Setup
 
-* Sign up for a Digital Ocean account (https://www.digitalocean.com/)
+1. Sign up for a Digital Ocean account (https://www.digitalocean.com/)
 
-* Login
+2. Login
 
-* Create Droplet
+3. Create Droplet
 
-* Under `Distributions` select `Debian` version `9.3 x64` or newer.
+4. Under `Distributions` select `Debian` version `9.3 x64` or newer.
 
-* Choose a size in your budget
+5. Choose a size in your budget
 
-* Choose a `datacenter region` likely one close to your target audience
+6. Choose a `datacenter region` likely one close to your target audience
 
-* Leave out SSH Key unless you know how to create one.
+7. Leave out SSH Key unless you know how to create one.
 
-* Finalize and create: 1 Droplet is fine
+8. Finalize and create: 1 Droplet is fine
 
 Let Droplet finish initializing. Check email for the following (unless you setup an SSH Key on step #7):
 
@@ -98,7 +98,7 @@ Type `yes` then hit `enter`
     postgres=#
     ``` 
 
-Create database and user. Replace `projname` with the settings of your database
+3. Create database and user. Replace `projname` with the settings of your database
     ```
     dropdb <projname>
     dropuser <projname>user
@@ -111,7 +111,7 @@ Create database and user. Replace `projname` with the settings of your database
     psql -d <projname> -c "CREATE EXTENSION postgis;"
     ```
 
-Run the following:
+4. Create django models in database
     ```
     cd /var/www/env/
     source bin/activate
