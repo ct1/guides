@@ -11,8 +11,7 @@ ssh root@<production-server-ip-address>
 ``` 
 
 #### Create postgresql database
-Create database as explained [here](./django_postgresql.md). Look for topic [Create postgresql database](./django_postgresql.md)
-
+Create database as explained [here](./digital_ocean_django_deployment.md). Look for topic SSH & install postgresql 
 
 ### 2. Configure PostgreSQL  to allow remote connection
 By default PostgreSQL is configured to be bound to “localhost”.
