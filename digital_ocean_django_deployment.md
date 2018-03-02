@@ -111,7 +111,7 @@ From now on, use this `<new_password>` with `ssh root@<ip_address>` to acccess y
     dropuser <projname>user
 
     # create user and database
-    psql -c "CREATE USER <userid> WITH PASSWORD 'password'; "
+    psql -c "CREATE USER <userid> WITH PASSWORD 'password';"
     createdb --owner=<userid> -E utf8 <projname>
 
     # create postgis extension to handle geometry data
