@@ -116,6 +116,9 @@ From now on, use this `<new_password>` with `ssh root@<ip_address>` to acccess y
 
     # create postgis extension to handle geometry data
     psql -d <projname> -c "CREATE EXTENSION postgis;"
+
+    # exit postgres
+    exit
     ```
 
 5. Create django models in database
