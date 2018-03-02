@@ -33,6 +33,7 @@ Password: <password>
 ``` 
 
 
+
 #### 2. Digital Ocean & Terminal/PuTTY
 
 1. In terminal([PuTTY](http://www.putty.org/) if on Windows) and enter:
@@ -58,7 +59,9 @@ Password: <password>
 From now on, use this `<new_password>` with `ssh root@<ip_address>` to acccess your `Droplet`.
  
 
+
 ### 3. Setup local django project [here](./django_postgresql.md)
+
 
 ### 4. Setup your debian system for django + apache [here](./debian_django_apache2.md)
 
@@ -129,6 +132,7 @@ If required zbar need to install development packages
     ```
      sudo apt-get install libzbar-dev python3-dev
     ``` 
+
 
 
 ### 7. FTP Local Django Project to Digital Ocean
