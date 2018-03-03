@@ -66,7 +66,7 @@ From now on, use this `<new_password>` with `ssh root@<ip_address>` to acccess y
 ### 4. Setup your debian system for django + apache [here](./debian_django_apache2.md)
 
 
-### 5. SSH & install postgresql
+### 6. SSH & install postgresql
 
 1. Execute the following commands
     ```
@@ -121,16 +121,6 @@ From now on, use this `<new_password>` with `ssh root@<ip_address>` to acccess y
     exit
     ```
 
-5. Create django models in database
-    ```
-    cd /var/www/env/
-    source bin/activate
-    cd ../<your-project>
-    python manage.py makemigrations
-    python manage.py migrate
-    ```
-
-
 
 ### 6. Install other applications if required
 
@@ -140,8 +130,25 @@ If required zbar need to install development packages
     ``` 
 
 
+### 7. Deploy your local project to Digital Ocean [here](./production_git.md)
 
-### 7. FTP Local Django Project to Digital Ocean
+1. Update Apache2 to your project's name/settings if needed.
+    confirm 
+
+2. Restart apache `sudo service apache2 restart`
+
+3. Create django models in database
+    ```
+    cd /var/www/<your-project>
+    source env/bin/activate
+    python manage.py makemigrations
+    python manage.py migrate
+    ```
+
+4. Restart apache `sudo service apache2 restart`
+
+
+### 8. Alternatively, you can FTP your local django project to Digital Ocean
 
 1. Open an FTP Client (like Transmit or Cyberduck)
 
@@ -156,8 +163,19 @@ If required zbar need to install development packages
 6. SSH into your `<ip_address>` like `ssh root@<ip_address>` 
 
 7. Update Apache2 to your project's name/settings if needed.
+    confirm 
 
 8. Restart apache `sudo service apache2 restart`
 
-9. Navigate to your `<ip_address>` (or domain name) in your browser.
+9. Create django models in database
+    ```
+    cd /var/www/<your-project>
+    source env/bin/activate
+    python manage.py makemigrations
+    python manage.py migrate
+    ```
+
+10. Restart apache `sudo service apache2 restart`
+
+11. Navigate to your `<ip_address>` (or domain name) in your browser.
 
