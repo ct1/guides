@@ -5,8 +5,12 @@ A installation guide to initialize postgresql database
 ----------
 
 ### 7. Initialize database
+1. Login to your production server.
+    ```
+    ssh root@<production-server-ip-address>
+    ``` 
 
-1. Create django models in database
+2. Create django database
     ```
     cd /var/www/<your-project>
     source env/bin/activate
@@ -17,7 +21,7 @@ A installation guide to initialize postgresql database
     python manage.py collectstatic
     ```
 
-2. Create superuser
+3. Create postgresql superuser
     Replace `superuser` with the settings of your  admin
     ```
     echo "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser(<superuser_name>, '<superuser_email>', '<superuser_password>')" | python manage.py shell
