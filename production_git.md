@@ -86,7 +86,7 @@ git commit -m "Project ready"
 git push production master
 ``` 
 
-### 5. Install python requiremnts
+### 5. Install python requirements
 Login to your production server.
 ```
 ssh root@<production-server-ip-address>
