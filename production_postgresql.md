@@ -69,7 +69,7 @@ psql -d <projname> -c "CREATE EXTENSION postgis;"
 # exit postgres
 exit
 ```
-Ensure this settings match the database settings on your django project
+Ensure these settings match the database settings on your django project
 
 
 ### 3. Create superuser
