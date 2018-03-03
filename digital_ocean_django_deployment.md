@@ -143,6 +143,15 @@ If required zbar need to install development packages
     source env/bin/activate
     python manage.py makemigrations
     python manage.py migrate
+    python manage.py collectstatic
+    ```
+    Two options to create a database superuser
+    ```
+    # option 1
+    python manage.py createsuperuser
+
+    # option 2. Replace superuser (name, email, password) values and execute the command
+    echo "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('superuser_name', 'superuser_email', 'superuser_password')" | python manage.py shell
     ```
 
 4. Restart apache `sudo service apache2 restart`
@@ -173,6 +182,15 @@ If required zbar need to install development packages
     source env/bin/activate
     python manage.py makemigrations
     python manage.py migrate
+    python manage.py collectstatic
+    ```
+    Two options to create a database superuser
+    ```
+    # option 1
+    python manage.py createsuperuser
+
+    # option 2. Replace superuser (name, email, password) values and execute the command
+    echo "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('superuser_name', 'superuser_email', 'superuser_password')" | python manage.py shell
     ```
 
 10. Restart apache `sudo service apache2 restart`
