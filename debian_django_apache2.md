@@ -70,10 +70,8 @@ Setup Django, Apache2, Python Tools, and mod_wsgi on Debian Linux Systems. (Debi
     ```
 
 
-6. Add User Permissions (to modify sqlite3 Database)
+6. Add User Permissions (to access django project)
     ```
-    chmod 664 ~/<projname>/db.sqlite3
-    sudo chown :www-data ~/<projname>/db.sqlite3
     sudo chown :www-data ~/<projname>
     ```
 
