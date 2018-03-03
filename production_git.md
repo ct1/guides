@@ -5,7 +5,11 @@ How to use Git to deploy your application on Digital Ocean
 ----------
 
 ### 1. Install Git and create Git repository in Digital Ocean
-Login to your VPS from command and install Git
+Login to your production server.
+```
+ssh root@<production-server-ip-address>
+``` 
+Install Git
 ```
 sudo apt-get update
 sudo apt-get install git-core
@@ -34,11 +38,11 @@ Confirm the existance and go to 'hooks' folder:
 cd hooks
 ``` 
 
-Create the file 'post-receive'. Replace <your-dir> with your project production folder. Replace <master> with your emmiting repository
+Create the file 'post-receive'. Replace <projname> with your project production folder. Replace <master> with your emmiting repository
 ```
 cat > post-receive
 #!/bin/bash
-TARGET='/var/www/<your-dir>'
+TARGET='/var/www/<projname>'
 GIT_DIR='/var/repo/site.git'
 BRANCH='<master>'
 

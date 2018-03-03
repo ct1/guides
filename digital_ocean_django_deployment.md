@@ -57,21 +57,21 @@ Password: <password>
 From now on, use this `<new_password>` with `ssh root@<ip_address>` to acccess your `Droplet`.
  
 
-### 3. Test website with simple django project [here](./django_postgresql.md)
+### 3. Deploy your django project to Digital Ocean [here](./production_git.md)
 
 
-### 4. Setup your debian system for django + apache [here](./debian_django_apache2.md)
+### 4. Install postgresql in debian system [here](./debian_postgresql_setup.md)
 
 
-### 5. Install postgresql [here](./production_postgresql.md)
-
-
-### 6. Install other applications if required
+### 5. Install other applications if required
 
 If required zbar need to install development packages 
     ```
      sudo apt-get install libzbar-dev python3-dev
     ``` 
+
+
+### 6. Setup debian for django + apache [here](./debian_django_apache2.md)
 
 
 ### 7. Deploy your local project to Digital Ocean [here](./production_git.md)

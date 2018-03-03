@@ -52,31 +52,31 @@ Setup Django, Apache2, Python Tools, and mod_wsgi on Debian Linux Systems. (Debi
     Replace `projname` with the name of your project
     ```
     <VirtualHost *:80>
-    ServerName localhost
-    ServerAdmin webmaster@localhost
+        ServerName localhost
+        ServerAdmin webmaster@localhost
 
-    Alias /static /var/www/<projname>/static
-    <Directory /var/www/<projname>/static>
-       Require all granted
-     </Directory>
+        Alias /static /var/www/<projname>/static
+        <Directory /var/www/<projname>/static>
+           Require all granted
+         </Directory>
 
-    Alias /media /var/www/<projname>/media
-    <Directory /var/www/<projname>/media>
-       Require all granted
-    </Directory>
+        Alias /media /var/www/<projname>/media
+        <Directory /var/www/<projname>/media>
+           Require all granted
+        </Directory>
 
-    <Directory /var/www/<projname>/<projname>>
-        <Files wsgi.py>
-            Require all granted
-        </Files>
-    </Directory>
+        <Directory /var/www/<projname>/<projname>/settings>
+            <Files wsgi.py>
+                Require all granted
+            </Files>
+        </Directory>
 
-    WSGIDaemonProcess <projname> python-path=/var/www/<projname> python-home=/var/www/<projname>/env
-    WSGIProcessGroup <projname>
-    WSGIScriptAlias / /var/www/<projname>/<projname>/wsgi.py
+        WSGIDaemonProcess <projname> python-path=/var/www/<projname> python-home=/var/www/<projname>/env
+        WSGIProcessGroup <projname>
+        WSGIScriptAlias / /var/www/<projname>/<projname>/settings/wsgi.py
 
-    ErrorLog ${APACHE_LOG_DIR}/error.log
-    CustomLog ${APACHE_LOG_DIR}/access.log combined
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
 
     </VirtualHost>
     ```

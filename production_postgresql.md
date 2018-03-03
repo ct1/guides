@@ -10,8 +10,46 @@ Login to your production server.
 ssh root@<production-server-ip-address>
 ``` 
 
+
+#### Install postgresql
+1. Install postgresql and postgis on your Debian Linux System
+
+  ```
+  sudo apt-get update
+
+  sudo apt-get upgrade
+
+  sudo apt-get install postgresql postgresql-contrib
+  ```
+
+
+
+
 #### Create postgresql database
-Create database as explained [here](./digital_ocean_django_deployment.md). Look for topic SSH & install postgresql 
+
+    *NOTE* Replace db_user (name, password) and proj_db values
+    for your case, before executing db commands. Make sure they match values you've defined in django settings
+    ```
+    # currently working in 
+    # ~/Dev/<projname> on mac/linux
+    # \Users\YourName\Dev\<projname> on windows
+    ```
+    Replace `projname` with the settings of your database
+    ```
+    dropdb <projname>
+    dropuser <projname>user
+
+    # create user and database
+    psql -c "CREATE USER <projname>user WITH PASSWORD '<projname>user_pswd'; "
+    createdb --owner=<projname>user -E utf8 <projname>
+
+    # create postgis extension to handle geometry data
+    psql -d <projname> -c "CREATE EXTENSION postgis;"
+    ```
+
+
+
+
 
 ### 2. Configure PostgreSQL  to allow remote connection
 By default PostgreSQL is configured to be bound to “localhost”.
