@@ -57,27 +57,23 @@ Password: <password>
 From now on, use this `<new_password>` with `ssh root@<ip_address>` to acccess your `Droplet`.
  
 
-### 3. Deploy your django project to Digital Ocean [here](./production_git.md)
+### 3. Setup postgresql in Digital Ocean [here](./production_postgresql.md)
 
 
-### 4. Install postgresql in Digital Ocean [here](./debian_postgresql_setup.md)
-
-
-### 5. Install other applications if required
+### 4. Install other applications if required
 
 If required zbar need to install development packages 
     ```
      sudo apt-get install libzbar-dev python3-dev
     ``` 
 
+### 5. Deploy your django project to Digital Ocean [here](./production_git.md)
+
 
 ### 6. Setup debian for django + apache [here](./debian_django_apache2.md)
 
 
-### 7. Deploy your local project to Digital Ocean [here](./production_git.md)
-
-
-### 8. Setup apache2 and initialize database
+### 7. Initialize database
 1. Update Apache2 to your project's name/settings if needed.
     confirm 
 

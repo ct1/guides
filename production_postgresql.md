@@ -4,54 +4,91 @@ Configure PostgreSQL to allow remote connection and initialize data
 
 ----------
 
-### 1. Create project database in remote PostgreSQL
-Login to your production server.
+### 1. Install postgresql and postgis
+Connect to your remote server connect with ssh. In terminal([PuTTY](http://www.putty.org/) if on Windows) enter:
 ```
-ssh root@<production-server-ip-address>
+ # format
+ ssh root@<ip_address>
+
+ #example:
+ ssh root@104.131.146.34
+```
+
+Go to the project folder and execute commands:
+```
+cd <projname>
+sudo apt-get update
+sudo apt-get install postgresql-9.6 postgresql-client-9.6 postgresql-9.6-postgis-2.3 -f
+```
+
+Check the installation
+```
+ps -ef | grep postgre
+```
+You should see something like this on the terminal:
+```
+postgres 32164     1  0 21:58 ?        00:00:00 /usr/lib/postgresql/9.4/bin/postgres -D /var/lib/   postgresql/9.4/main -c config_file=/etc/postgresql/9.4/main/postgresql.conf
+postgres 32166 32164  0 21:58 ?        00:00:00 postgres: checkpointer process
+postgres 32167 32164  0 21:58 ?        00:00:00 postgres: writer process
+postgres 32168 32164  0 21:58 ?        00:00:00 postgres: wal writer process
+postgres 32169 32164  0 21:58 ?        00:00:00 postgres: autovacuum launcher process
+postgres 32170 32164  0 21:58 ?        00:00:00 postgres: stats collector process
 ``` 
 
+Log as postgres and check psql is working
+```
+su - postgres
+psql
+```
+You should see something like this on the terminal:
+```
+psql (9.6.6)
+Type "help" for help.
 
-#### Install postgresql
-1. Install postgresql and postgis on your Debian Linux System
-
-  ```
-  sudo apt-get update
-
-  sudo apt-get upgrade
-
-  sudo apt-get install postgresql postgresql-contrib
-  ```
-
-
-
-
-#### Create postgresql database
-
-    *NOTE* Replace db_user (name, password) and proj_db values
-    for your case, before executing db commands. Make sure they match values you've defined in django settings
-    ```
-    # currently working in 
-    # ~/Dev/<projname> on mac/linux
-    # \Users\YourName\Dev\<projname> on windows
-    ```
-    Replace `projname` with the settings of your database
-    ```
-    dropdb <projname>
-    dropuser <projname>user
-
-    # create user and database
-    psql -c "CREATE USER <projname>user WITH PASSWORD '<projname>user_pswd'; "
-    createdb --owner=<projname>user -E utf8 <projname>
-
-    # create postgis extension to handle geometry data
-    psql -d <projname> -c "CREATE EXTENSION postgis;"
-    ```
+postgres=#
+``` 
+Leave psql
+```
+\q
+```
 
 
+### 2. Create database and user
+Replace `projname` with the settings of your database
+```
+dropdb <projname>
+dropuser <projname>user
+
+# create user and database
+psql -c "CREATE USER <userid> WITH PASSWORD 'password';"
+createdb --owner=<userid> -E utf8 <projname>
+
+# create postgis extension to handle geometry data
+psql -d <projname> -c "CREATE EXTENSION postgis;"
+
+# exit postgres
+exit
+```
+
+### 3. Create superuser
+Replace `superuser` with the settings of your  admin
+```
+echo "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser(<superuser_name>, '<superuser_email>', '<superuser_password>')" | python manage.py shell
+```
+
+Alternatively, the admin user ca be created interactively
+```
+python manage.py createsuperuser
+```
 
 
+#### NOTE - Data in database is initialized after the setup of django project
+* python manage.py makemigrations
+* python manage.py migrate
+* python manage.py collectstatic
 
-### 2. Configure PostgreSQL  to allow remote connection
+
+### 4. Configure PostgreSQL to allow remote connection
 By default PostgreSQL is configured to be bound to “localhost”.
 
 #### Configure postgresql.conf
@@ -123,7 +160,7 @@ Check postgresql status
   ``` 
 
 
-### 3. Check remote access
+### 5. Check remote access
 Login to the client machine and check the remote connection.
 Replace the ip-address with your production server ip-address
 Replace database settings with your production database settings
@@ -140,7 +177,7 @@ or use the postgres user to check connection.
   You should be able to see list of databases.
 
 
-### 4. Configure remote database in pgAdmin
+### 6. Configure remote database in pgAdmin
 1. Open pgAdmin 4 in your local machine.
 
 2. Configure a remote server.
@@ -159,7 +196,7 @@ or use the postgres user to check connection.
   If connection is established you should have your remote connection configured now.
 
 
-### 5. Setup triggers for full text search tables
+### 7. Setup triggers for full text search tables
 If you don't need to manually create triggers for tables (e.g. full text search) skip this topic.
 
 In pgAdmin 4 go to Servers/<myproj_production>/Databases/<database-name>/Schemas/public/Tables.
@@ -186,7 +223,7 @@ For each table you need to create triggers execute their corresponding script. E
   ``` 
 
 
-### 6. Initialize database
+### 8. Initialize database
 Initial content is created executing scripts in the production server (not in the other environments)
 
 #### Create base geo tables
