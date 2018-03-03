@@ -126,13 +126,16 @@ Open pg_hba.conf in the same folder
   ``` 
 Replace line
   ```
-  # listen_addresses = 'localhost'
+  local   all        all                peer
   ``` 
 with
   ```
-  listen_addresses = '*'
+  #local   all        all                peer
+  local   all        all                md5
   ``` 
-Add following entry at the very end.
+This way external connections will require password credentials from database users 
+
+Add also the following entries at the very end of the file.
 Replace 0.0.0.0 by your local machine ip address (replace `0.0.0.0/0` by `your-local-ip-address/0`)
   ```
   host	all    all    0.0.0.0/0    md5
