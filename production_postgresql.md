@@ -71,21 +71,6 @@ exit
 Ensure these settings match the database settings on your django project
 
 
-### 3. Create superuser
-Go to your django project folder
-```
-cd /var/www/<projname>
-```
-Replace `superuser` with the settings of your db admin and execute command
-```
-echo "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser(<superuser_name>, '<superuser_email>', '<superuser_password>')" | python manage.py shell
-```
-
-Alternatively, the admin user ca be created interactively
-```
-python manage.py createsuperuser
-```
-
 
 #### NOTE - Data in database is initialized after the setup of django project
 * python manage.py makemigrations
