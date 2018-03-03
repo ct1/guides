@@ -54,13 +54,13 @@ Leave psql
 
 
 ### 2. Create database and user
-Replace `projname` with the settings of your database
+Replace `projname`, `userid` and `password` with the settings of your database
 ```
 dropdb <projname>
-dropuser <projname>user
+dropuser <userid>
 
 # create user and database
-psql -c "CREATE USER <userid> WITH PASSWORD 'password';"
+psql -c "CREATE USER <userid> WITH PASSWORD '<password>';"
 createdb --owner=<userid> -E utf8 <projname>
 
 # create postgis extension to handle geometry data
@@ -69,6 +69,8 @@ psql -d <projname> -c "CREATE EXTENSION postgis;"
 # exit postgres
 exit
 ```
+Ensure this settings match the database settings on your django project
+
 
 ### 3. Create superuser
 Replace `superuser` with the settings of your  admin
