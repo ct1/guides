@@ -4,8 +4,7 @@ A installation guide for getting Django setup on Digital Ocean
 
 ----------
 
-
-### 1. Digital Ocean Setup
+### 1. Digital Ocean setup
 
 1. Sign up for a Digital Ocean account (https://www.digitalocean.com/)
 
@@ -33,10 +32,9 @@ Password: <password>
 ``` 
 
 
+#### 2. Connect to Digital Ocean server
 
-#### 2. Digital Ocean & Terminal/PuTTY
-
-1. In terminal([PuTTY](http://www.putty.org/) if on Windows) and enter:
+1. In terminal([PuTTY](http://www.putty.org/) if on Windows) enter:
     ```
      # format
      ssh root@<ip_address>
@@ -59,67 +57,13 @@ Password: <password>
 From now on, use this `<new_password>` with `ssh root@<ip_address>` to acccess your `Droplet`.
  
 
-
-### 3. Setup local django project [here](./django_postgresql.md)
+### 3. Test website with simple django project [here](./django_postgresql.md)
 
 
 ### 4. Setup your debian system for django + apache [here](./debian_django_apache2.md)
 
 
-### 6. SSH & install postgresql
-
-1. Execute the following commands
-    ```
-    sudo apt-get update
-    sudo apt-get install postgresql-9.6 postgresql-client-9.6 postgresql-9.6-postgis-2.3 -f
-    ```
-
-2. Check the installation
-    ```
-    ps -ef | grep postgre
-    ```
-    You should see something like this on the terminal:
-    ```
-    postgres 32164     1  0 21:58 ?        00:00:00 /usr/lib/postgresql/9.4/bin/postgres -D /var/lib/   postgresql/9.4/main -c config_file=/etc/postgresql/9.4/main/postgresql.conf
-    postgres 32166 32164  0 21:58 ?        00:00:00 postgres: checkpointer process
-    postgres 32167 32164  0 21:58 ?        00:00:00 postgres: writer process
-    postgres 32168 32164  0 21:58 ?        00:00:00 postgres: wal writer process
-    postgres 32169 32164  0 21:58 ?        00:00:00 postgres: autovacuum launcher process
-    postgres 32170 32164  0 21:58 ?        00:00:00 postgres: stats collector process
-    ``` 
-
-3. Log as postgres and check psql is working
-    ```
-    su - postgres
-    psql
-    ```
-    You should see something like this on the terminal:
-    ```
-    psql (9.6.6)
-    Type "help" for help.
-
-    postgres=#
-    ``` 
-    Leave psql
-    ```
-    \q
-    ```
-
-4. Create database and user. Replace `projname` with the settings of your database
-    ```
-    dropdb <projname>
-    dropuser <projname>user
-
-    # create user and database
-    psql -c "CREATE USER <userid> WITH PASSWORD 'password';"
-    createdb --owner=<userid> -E utf8 <projname>
-
-    # create postgis extension to handle geometry data
-    psql -d <projname> -c "CREATE EXTENSION postgis;"
-
-    # exit postgres
-    exit
-    ```
+### 5. Install postgresql [here](./production_postgresql.md)
 
 
 ### 6. Install other applications if required
@@ -132,6 +76,8 @@ If required zbar need to install development packages
 
 ### 7. Deploy your local project to Digital Ocean [here](./production_git.md)
 
+
+### 8. Setup apache2 and initialize database
 1. Update Apache2 to your project's name/settings if needed.
     confirm 
 
