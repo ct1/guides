@@ -62,7 +62,7 @@ From now on, use this `<new_password>` with `ssh root@<ip_address>` to acccess y
 
 ### 4. Install other applications if required
 
-If required zbar need to install development packages 
+    zbar module requires the installation of development packages 
     ```
      sudo apt-get install libzbar-dev python3-dev
     ``` 
