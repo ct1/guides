@@ -60,7 +60,7 @@ From now on, use this `<new_password>` with `ssh root@<ip_address>` to acccess y
 ### 3. Deploy your django project to Digital Ocean [here](./production_git.md)
 
 
-### 4. Install postgresql in debian system [here](./debian_postgresql_setup.md)
+### 4. Install postgresql in Digital Ocean [here](./debian_postgresql_setup.md)
 
 
 ### 5. Install other applications if required
