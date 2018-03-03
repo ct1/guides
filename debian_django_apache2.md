@@ -23,7 +23,7 @@ Setup Django, Apache2, Python Tools, and mod_wsgi on Debian Linux Systems. (Debi
     sudo pip install virtualenv 
     cd /var/www<projname>
     ```
-    Create project folder and virtual envirenment
+    Create project folder and virtual environment
     ```
     virtualenv -p python3 env
     source env/bin/activate
