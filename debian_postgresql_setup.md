@@ -84,7 +84,7 @@ python manage.py createsuperuser
 
 
 
-##### NOTE - Data in creation is executed after the setup of django project
+#### NOTE - Data in creation is executed after the setup of django project
 * python manage.py makemigrations
 * python manage.py migrate
 * python manage.py collectstatic
