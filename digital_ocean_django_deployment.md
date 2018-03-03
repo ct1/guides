@@ -72,69 +72,11 @@ zbar module requires the installation of development packages
 ### 6. Setup debian for django + apache [here](./debian_django_apache2.md)
 
 
-### 7. Initialize database
-1. Update Apache2 to your project's name/settings if needed.
-    confirm 
-
-2. Restart apache `sudo service apache2 restart`
-
-3. Create django models in database
-    ```
-    cd /var/www/<your-project>
-    source env/bin/activate
-    python manage.py makemigrations
-    python manage.py migrate
-    python manage.py collectstatic
-    ```
-    Two options to create a database superuser
-    ```
-    # option 1
-    python manage.py createsuperuser
-
-    # option 2. Replace superuser (name, email, password) values and execute the command
-    echo "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('superuser_name', 'superuser_email', 'superuser_password')" | python manage.py shell
-    ```
-
-4. Restart apache `sudo service apache2 restart`
+### 7. Initialize database [here](./production_initialize_db.md)
 
 
-### 8. Alternatively, you can FTP your local django project to Digital Ocean
+### 8. Restart apache `sudo service apache2 restart`
 
-1. Open an FTP Client (like Transmit or Cyberduck)
 
-2. SFTP into your `<ip_address>` using `root` and your `password`
-
-3. Navigate to `/var/www`
-
-4. Navigate to `<your-project>/django_proj/settings/` and remove `local.py`
-
-5. Open Terminal/PuTTY
-
-6. SSH into your `<ip_address>` like `ssh root@<ip_address>` 
-
-7. Update Apache2 to your project's name/settings if needed.
-    confirm 
-
-8. Restart apache `sudo service apache2 restart`
-
-9. Create django models in database
-    ```
-    cd /var/www/<your-project>
-    source env/bin/activate
-    python manage.py makemigrations
-    python manage.py migrate
-    python manage.py collectstatic
-    ```
-    Two options to create a database superuser
-    ```
-    # option 1
-    python manage.py createsuperuser
-
-    # option 2. Replace superuser (name, email, password) values and execute the command
-    echo "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('superuser_name', 'superuser_email', 'superuser_password')" | python manage.py shell
-    ```
-
-10. Restart apache `sudo service apache2 restart`
-
-11. Navigate to your `<ip_address>` (or domain name) in your browser.
+### 9. Navigate to your `<ip_address>` (or domain name) in your browser.
 

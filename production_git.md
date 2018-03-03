@@ -86,3 +86,61 @@ git commit -m "Project ready"
 git push production master
 ``` 
 
+### 5. Install python requiremnts
+Login to your production server.
+```
+ssh root@<production-server-ip-address>
+``` 
+
+Install python requirements
+```
+cd /var/www/<your-project>
+source env/bin/activate
+cd <your-project>
+
+pip install -r ./requirements.txt
+```
+
+
+
+
+
+### NOTE: Alternatively, you can FTP your local django project to Digital Ocean
+
+1. Open an FTP Client (like Transmit or Cyberduck)
+
+2. SFTP into your `<ip_address>` using `root` and your `password`
+
+3. Navigate to `/var/www`
+
+4. Navigate to `<your-project>/django_proj/settings/` and remove `local.py`
+
+5. Open Terminal/PuTTY
+
+6. SSH into your `<ip_address>` like `ssh root@<ip_address>` 
+
+7. Update Apache2 to your project's name/settings if needed.
+    confirm 
+
+8. Restart apache `sudo service apache2 restart`
+
+9. Create django models in database
+    ```
+    cd /var/www/<your-project>
+    source env/bin/activate
+    python manage.py makemigrations
+    python manage.py migrate
+    python manage.py collectstatic
+    ```
+    Two options to create a database superuser
+    ```
+    # option 1
+    python manage.py createsuperuser
+
+    # option 2. Replace superuser (name, email, password) values and execute the command
+    echo "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('superuser_name', 'superuser_email', 'superuser_password')" | python manage.py shell
+    ```
+
+10. Restart apache `sudo service apache2 restart`
+
+

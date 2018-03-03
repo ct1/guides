@@ -22,17 +22,6 @@ psql -d <projname> -c "CREATE EXTENSION postgis;"
 exit
 ```
 
-### 3. Create superuser
-Replace `superuser` with the settings of your  admin
-```
-echo "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser(<superuser_name>, '<superuser_email>', '<superuser_password>')" | python manage.py shell
-```
-
-Alternatively, the admin user ca be created interactively
-```
-python manage.py createsuperuser
-```
-
 
 #### NOTE - Data in database is initialized after the setup of django project
 * python manage.py makemigrations
