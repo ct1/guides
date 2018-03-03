@@ -133,7 +133,7 @@ with
   #local   all        all                peer
   local   all        all                md5
   ``` 
-This way external connections will require password credentials from database users 
+This way external connections will request password credentials to database users 
 
 Add also the following entries at the very end of the file.
 Replace 0.0.0.0 by your local machine ip address (replace `0.0.0.0/0` by `your-local-ip-address/0`)
