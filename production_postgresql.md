@@ -78,7 +78,7 @@ Ensure these settings match the database settings on your django project
 * python manage.py collectstatic
 
 
-### 4. Configure PostgreSQL to allow remote connection
+### 3. Configure PostgreSQL to allow remote connection
 By default PostgreSQL is configured to be bound to “localhost”.
 
 #### Configure postgresql.conf
@@ -151,7 +151,7 @@ Check postgresql status
   ``` 
 
 
-### 5. Check remote access
+### 4. Check remote access
 Login to the client machine and check the remote connection.
 Replace the ip-address with your production server ip-address
 Replace database settings with your production database settings
@@ -168,7 +168,7 @@ or use the postgres user to check connection.
   You should be able to see list of databases.
 
 
-### 6. Configure remote database in pgAdmin
+### 5. Configure remote database in pgAdmin
 1. Open pgAdmin 4 in your local machine.
 
 2. Configure a remote server.
@@ -187,7 +187,7 @@ or use the postgres user to check connection.
   If connection is established you should have your remote connection configured now.
 
 
-### 7. Setup triggers for full text search tables
+### 6. Setup triggers for full text search tables
 If you don't need to manually create triggers for tables (e.g. full text search) skip this topic.
 
 In pgAdmin 4 go to Servers/<myproj_production>/Databases/<database-name>/Schemas/public/Tables.
@@ -213,30 +213,6 @@ For each table you need to create triggers execute their corresponding script. E
   ON shared_campaigns FOR EACH ROW EXECUTE PROCEDURE campaigns_trigger();
   ``` 
 
-
-### 8. Initialize database
-Initial content is created executing scripts in the production server (not in the other environments)
-
-#### Create base geo tables
-Go to your production server.
-  ```
-  ssh root@<production-server-ip-address>
-  ``` 
-Activate virtualenv, then go the production scripts folder.
-Replace proj-name with your project name.
-  ```
-  cd /var/www
-  source env/bin/activate
-  cd <proj-name>/py/production
-  ```
-execute script and confirm output.
-  ```
-  ./1-loaddata_geo.sh
-  ```
-  You should see something like this on the terminal:
-  ```
-  Installed 323 object(s) from 1 fixture(s)
-  ```
 
 
 ### NOTE: In case you want to completely remove postgresql from your server do
