@@ -42,7 +42,7 @@ Create the file 'post-receive'. Replace <projname> with your project production 
 ```
 cat > post-receive
 #!/bin/bash
-TARGET='/var/www/<projname>'
+TARGET='/var/www/<projname>/<projname>'
 GIT_DIR='/var/repo/site.git'
 BRANCH='<master>'
 
