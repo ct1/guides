@@ -18,26 +18,16 @@ Setup Django, Apache2, Python Tools, and mod_wsgi on Debian Linux Systems. (Debi
     ```
 
 2. Start Virtualenv & Django Project
+    We assume the project folder is already created and python project already deployed
     ```
     sudo pip install virtualenv 
-    cd /var/www
+    cd /var/www<projname>
     ```
     Create project folder and virtual envirenment
     ```
-    mkdir <projname> && cd <projname>
     virtualenv -p python3 env
     source env/bin/activate
     python --version    #should return Python 3.5
-    ```
-    Install django and create django project
-    ```
-    pip install django==1.11.6
-    django-admin.py startproject <projname> .
-    ```
-    Create the database and a superuser
-    ```
-    python manage.py migrate
-    python manage.py createsuperuser 
     ```
 
 3. Setup Static & Media Root directories.
@@ -46,7 +36,6 @@ Setup Django, Apache2, Python Tools, and mod_wsgi on Debian Linux Systems. (Debi
     ```
 
 4. Open `sudo nano /etc/apache2/sites-available/000-default.conf`
-
 
 5. Change Apache2 configuration
     Replace `projname` with the name of your project
