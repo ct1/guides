@@ -5,30 +5,29 @@ Setup Django, Apache2, Python Tools, and mod_wsgi on Debian Linux Systems. (Debi
 
 1. Install Python Tools, Apache2, and Mod_WSGI on your Debian Linux System
 
-```
-sudo apt-get update
+    ```
+    sudo apt-get update
 
-sudo apt-get upgrade
+    sudo apt-get upgrade
 
-sudo apt-get install apache2
+    sudo apt-get install apache2
 
-sudo apt-get install python-pip python-virtualenv python-setuptools python-dev build-essential
+    sudo apt-get install python-pip python-virtualenv python-setuptools python-dev build-essential
 
-sudo apt-get install libapache2-mod-wsgi-py3
-```
+    sudo apt-get install libapache2-mod-wsgi-py3
+    ```
 
-2. Start virtualenv & django project.
-We assume the project folder is already created and python project deployed.
-```
-sudo pip install virtualenv 
-cd /var/www<projname>
-```
-Create project folder and virtual environment
-```
-virtualenv -p python3 env
-source env/bin/activate
-python --version    #should return Python 3.5
-```
+2. Start virtualenv & django project (assuming python project is already been deployed).
+    ```
+    sudo pip install virtualenv 
+    cd /var/www<projname>
+    ```
+    Create project folder and virtual environment
+    ```
+    virtualenv -p python3 env
+    source env/bin/activate
+    python --version    #should return Python 3.5
+    ```
 
 3. Setup Static & Media Root directories.
     ```
