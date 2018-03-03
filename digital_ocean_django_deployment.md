@@ -63,7 +63,7 @@ From now on, use this `<new_password>` with `ssh root@<ip_address>` to acccess y
 ### 4. Install other applications if required
 zbar module requires the installation of development packages
 ```
- sudo apt-get install libzbar-dev python3-dev
+sudo apt-get install libzbar-dev python3-dev
 ``` 
 
 ### 5. Deploy your django project to Digital Ocean [here](./production_git.md)
@@ -75,7 +75,10 @@ zbar module requires the installation of development packages
 ### 7. Initialize database [here](./production_initialize_db.md)
 
 
-### 8. Restart apache `sudo service apache2 restart`
+### 8. Restart apache
+```
+sudo service apache2 restart
+``` 
 
 
 ### 9. Navigate to your `<ip_address>` (or domain name) in your browser.
