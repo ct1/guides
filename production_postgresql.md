@@ -14,9 +14,8 @@ Connect to your remote server connect with ssh. In terminal([PuTTY](http://www.p
  ssh root@104.131.146.34
 ```
 
-Go to the project folder and execute commands:
+Install postgresql and postgis
 ```
-cd <projname>
 sudo apt-get update
 sudo apt-get install postgresql-9.6 postgresql-client-9.6 postgresql-9.6-postgis-2.3 -f
 ```
@@ -73,7 +72,11 @@ Ensure these settings match the database settings on your django project
 
 
 ### 3. Create superuser
-Replace `superuser` with the settings of your  admin
+Go to your django project folder
+```
+cd /var/www/<projname>
+```
+Replace `superuser` with the settings of your db admin and execute command
 ```
 echo "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser(<superuser_name>, '<superuser_email>', '<superuser_password>')" | python manage.py shell
 ```
