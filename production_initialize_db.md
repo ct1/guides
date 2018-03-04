@@ -4,8 +4,7 @@ A installation guide to initialize postgresql database
 
 ----------
 
-### 1. Initialize database
-Login to your production server.
+### 1. Login to production server
   ```
   ssh root@<production-server-ip-address>
   ``` 
