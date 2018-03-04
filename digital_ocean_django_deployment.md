@@ -68,18 +68,19 @@ sudo apt-get install libzbar-dev python3-dev
 
 ### 5. Deploy your django project to Digital Ocean [here](./production_git.md)
 
+### 6. Complete django project setup [here](./production_django_setup.md)
 
-### 6. Setup debian for django + apache [here](./debian_django_apache2.md)
-
-
-### 7. Initialize database [here](./production_initialize_db.md)
+### 7. Setup debian for django + apache [here](./debian_django_apache2.md)
 
 
-### 8. Restart apache
+### 8. Initialize database [here](./production_initialize_db.md)
+
+
+### 9. Restart apache
 ```
 sudo service apache2 restart
 ``` 
 
 
-### 9. Navigate to your `<ip_address>` (or domain name) in your browser.
+### 10. Navigate to your `<ip_address>` (or domain name) in your browser.
 
