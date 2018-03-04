@@ -9,13 +9,8 @@ An installation guide for getting Django setup on Digital Ocean
 
 ### 2. Setup postgresql in Digital Ocean [here](./production_postgresql.md)
 
-### 3. Setup other applications if required [here](./production_other_applications.md)
 
-### 3. Install other applications if required
-zbar module requires the installation of development packages
-```
-sudo apt-get install libzbar-dev python3-dev
-``` 
+### 3. Setup other applications if required [here](./production_other_applications.md)
 
 
 ### 4. Deploy your django project to Digital Ocean [here](./production_git.md)
