@@ -70,9 +70,7 @@ exit
 ```
 Ensure these settings match the database settings on your django project
 
-
-
-#### NOTE - Data in database is initialized after the setup of django project
+NOTE - Data in database is initialized later, after the setup of django project
 * python manage.py makemigrations
 * python manage.py migrate
 * python manage.py createsuperuser
