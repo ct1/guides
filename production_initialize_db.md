@@ -33,3 +33,8 @@ execute script and confirm output.
   ```
   Installed 323 object(s) from 1 fixture(s)
   ```
+
+### 3. Restart apache2
+  ```
+  sudo service apache2 restart
+  ``` 
