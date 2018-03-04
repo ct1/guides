@@ -22,7 +22,7 @@ An installation guide for getting Django setup on Digital Ocean
 ### 6. Setup debian for django + apache [here](./debian_django_apache2.md)
 
 
-### 7. Initialize our database [here](./production_initialize_db.md)
+### 7. Initial load of our database [here](./production_initialize_db.md)
 
 
 ### 8. Navigate to our `<ip_address>` (or domain name) in the browser.
