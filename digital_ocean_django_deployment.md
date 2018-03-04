@@ -19,7 +19,7 @@ An installation guide for getting Django setup on Digital Ocean
 ### 5. Complete our django project setup [here](./production_django_setup.md)
 
 
-### 6. Setup debian for django + apache [here](./debian_django_apache2.md)
+### 6. Setup debian for django + apache [here](./production_apache2.md)
 
 
 ### 7. Initial load of our database [here](./production_initialize_db.md)
