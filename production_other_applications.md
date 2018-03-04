@@ -11,7 +11,9 @@ sudo apt-get install libzbar-dev python3-dev
 ``` 
 
 
-### 2. Setup triggers in postgresql for full text search
+### 2. Database triggers for FTS (full text search)
+Full text search requires for the creation of triggers on postgresql.
+
 Open pgAdmin 4 in your local machine.
 
 Go to Servers/<myproj_production>/Databases/<database-name>/Schemas/public/Tables.
