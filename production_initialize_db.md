@@ -5,10 +5,10 @@ A installation guide to initialize postgresql database
 ----------
 
 ### 1. Initialize database
-1. Login to your production server.
-    ```
-    ssh root@<production-server-ip-address>
-    ``` 
+Login to your production server.
+  ```
+  ssh root@<production-server-ip-address>
+  ``` 
 
 ### 2. Initialize database
 Initial content is created executing scripts in the production server (not in the other environments)
