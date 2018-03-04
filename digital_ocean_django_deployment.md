@@ -4,7 +4,7 @@ An installation guide for getting Django setup on Digital Ocean
 
 ----------
 
-### 1. Digital Ocean setup [here](./digital_ocean_setup.md)
+### 1. Digital Ocean setup [here](./production-digital_ocean_setup.md)
 
 
 ### 2. Setup postgresql in Digital Ocean [here](./production_postgresql.md)
