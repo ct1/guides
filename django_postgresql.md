@@ -73,8 +73,8 @@ An implementation guide to create a local django + postgresql project
             'ENGINE' : 'django.contrib.gis.db.backends.postgis',
             #'ENGINE': 'django.db.backends.postgresql_psycopg2',
             'NAME': '<projname>',
-            'USER' : '<projname>user',
-            'PASSWORD' : '<projname>user_pswd',
+            'USER' : '<dbusername>',
+            'PASSWORD' : '<dbusername_password>',
             'HOST': 'localhost',
             'PORT': '',     
         }
