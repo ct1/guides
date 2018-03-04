@@ -186,34 +186,6 @@ or use the postgres user to check connection.
   If connection is established you should have your remote connection configured now.
 
 
-### 6. Setup triggers for full text search tables
-If you don't need to manually create triggers for tables (e.g. full text search) skip this topic.
-
-In pgAdmin 4 go to Servers/<myproj_production>/Databases/<database-name>/Schemas/public/Tables.
-
-For each table you need to create triggers execute their corresponding script. Example: script for table campaigns.
-  ```
-  Right-click/Scripts/SELECT script and go to the command line. 
-  ```
-  Replace existing script with:
-  ```
-  DROP TRIGGER IF EXISTS tsvectorupdate ON shared_campaigns;
-  DROP FUNCTION IF EXISTS campaigns_trigger();
-  CREATE FUNCTION campaigns_trigger() RETURNS trigger AS $$
-  begin
-    new.search_vector :=
-       setweight(to_tsvector('pg_catalog.english', coalesce(new.title,'')), 'A') ||
-       setweight(to_tsvector('pg_catalog.english', coalesce(new.body,'')), 'B');
-    return new;
-  end
-  $$ LANGUAGE plpgsql;
-
-  CREATE TRIGGER tsvectorupdate BEFORE INSERT OR UPDATE
-  ON shared_campaigns FOR EACH ROW EXECUTE PROCEDURE campaigns_trigger();
-  ``` 
-
-
-
 ### NOTE: In case you want to completely remove postgresql from your server do
   ```
   sudo apt-get purge 'postgresql-*'
