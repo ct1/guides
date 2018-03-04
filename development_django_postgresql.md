@@ -12,8 +12,8 @@ An implementation guide to create a local django + postgresql project
     mkdir Dev && cd Dev
     ```
 
-2. Create virtual environment
-    First install virtual environment for python 3
+2. Create virtual environment.
+First install virtual environment for python 3
     ```
     sudo apt-get install -y python3-venv
     ```
