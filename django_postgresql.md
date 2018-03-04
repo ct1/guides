@@ -76,7 +76,7 @@ An implementation guide to create a local django + postgresql project
             'USER' : '<dbusername>',
             'PASSWORD' : '<dbusername_password>',
             'HOST': 'localhost',
-            'PORT': '',     
+            'PORT': '',
         }
     }
     ```
