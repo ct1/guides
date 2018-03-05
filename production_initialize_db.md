@@ -24,12 +24,12 @@ Transfer database dump to production
   ``` 
 
 ### 3. Initialize database
-Ensure an empty destination database. Drop the existing database. The empty database should be created using "template0" as the base.
+Ensure an empty destination database. Disconnect all conections from production database. Drop the existing database. The empty database should be created using "template0" as the base.
   ```
+  su - postgres
   dropdb <dbname>
   createdb -T template0 <dbname>
 
-  su - postgres
   cd /var/www/<projname>/src/py
   psql <dbname> < dbexport.pgsql
   exit
