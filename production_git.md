@@ -86,6 +86,16 @@ git commit -m "Project ready"
 git push production master
 ``` 
 
+### 5. Login to production server
+```
+ssh root@<production-server-ip-address>
+``` 
+
+### 6. Remove local settings files
+```
+rm /var/www/<projname>/src/django_proj/settings/local*
+``` 
+
 
 ### NOTE: Alternatively, you can FTP your local django project to Digital Ocean
 
