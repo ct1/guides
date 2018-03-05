@@ -7,7 +7,7 @@ A installation guide to initialize postgresql database
 ### 1. Backup development database
 In your development machine
   ```
-  cd ~/dev/<projname>/<proj_name>/py
+  cd ~/dev/<projname>/<projname>/py
   pg_dump <dbname> > dbexport.pgsql
   ```
 Transfer database dump to your production environment
