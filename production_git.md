@@ -91,7 +91,7 @@ git push production master
 ssh root@<production-server-ip-address>
 ``` 
 
-### 6. Remove local settings files
+### 6. Ensure production configuration for django settings
 If local files are present, django uses them for settings. Otherwise it uses production files for settings
 ```
 rm /var/www/<projname>/src/django_proj/settings/local*
