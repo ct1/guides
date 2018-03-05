@@ -37,9 +37,9 @@ Ensure an empty destination database. Disconnect all conections from production 
 
 ### 4. Manually create media folder
 * Static files are files that you want to serve as part of the site (usually CSS, JavaScript and images).
-* Media files are files that users upload to your Django site.
-* Therefore collectstatic will ignore media files.
-After database initialization, media files will have to be collected manually
+* Media files are files that users upload to the application.
+* Therefore, collectstatic will ignore media files.
+After database import, media files have to be collected manually
   ```
   mv /var/www/<projname>/src/run/media /var/www/<projname>
   ``` 
