@@ -4,36 +4,38 @@ A installation guide to initialize postgresql database
 
 ----------
 
-### 1. Login to production server
+### 1. Backup development database
+In your development machine
+  ```
+  cd ~/dev/<projname>/<proj_name>/py
+  pg_dump <dbname> > dbexport.pgsql
+  ```
+Transfer database dump to your production environment
+  ```
+  git add .
+  git commit -m 'db export'
+  git push production master
+  ``` 
+
+### 2. Login to production server
   ```
   ssh root@<production-server-ip-address>
   ``` 
 
 ### 2. Initialize database
-Initial content is created executing scripts in the production server (not in the other environments)
-
-#### Create base geo tables
-Go to your production server.
+Ensure an empty destination database. Drop the existing database. The empty database should be created using "template0" as the base.
   ```
-  ssh root@<production-server-ip-address>
+  dropdb <dbname>
+  createdb -T template0 <dbname>
+
+  cd /var/www/<projname>/src/py
+  psql <dbname> < dbexport.pgsql
   ``` 
-Activate virtualenv, then go the production scripts folder.
-Replace proj-name with your project name.
-  ```
-  cd /var/www
-  source env/bin/activate
-  cd <proj-name>/py/production
-  ```
-execute script and confirm output.
-  ```
-  ./1-loaddata_geo.sh
-  ```
-  You should see something like this on the terminal:
-  ```
-  Installed 323 object(s) from 1 fixture(s)
-  ```
 
-### 3. Restart apache2
+### 3. Run cleaning scripts
+
+
+### 4. Restart apache2
   ```
   sudo service apache2 restart
   ``` 
