@@ -5,7 +5,7 @@ A installation guide to initialize postgresql database
 ----------
 
 ### 1. Backup development database
-In your development machine dump (create a backup) your development database
+In your development machine dump (backup) your development database
   ```
   cd ~/dev/<projname>/<projname>/py
   pg_dump <dbname> > dbexport.pgsql
@@ -16,6 +16,7 @@ Transfer database dump to production
   git commit -m 'db export'
   git push production master
   ``` 
+
 
 ### 2. Login to production server
   ```
@@ -28,14 +29,14 @@ Ensure an empty destination database. Drop the existing database. The empty data
   dropdb <dbname>
   createdb -T template0 <dbname>
 
+  su - postgres
   cd /var/www/<projname>/src/py
   psql <dbname> < dbexport.pgsql
+  exit
   ``` 
 
-### 4. Run cleaning scripts
 
-
-### 5. Restart apache2
+### 4. Restart apache2
   ```
   sudo service apache2 restart
   ``` 
