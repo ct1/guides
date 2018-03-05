@@ -92,6 +92,7 @@ ssh root@<production-server-ip-address>
 ``` 
 
 ### 6. Remove local settings files
+If local files are present, django uses them for settings. Otherwise it uses production files for settings
 ```
 rm /var/www/<projname>/src/django_proj/settings/local*
 ``` 
