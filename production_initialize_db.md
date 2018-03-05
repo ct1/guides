@@ -41,7 +41,7 @@ Ensure an empty destination database. Disconnect all conections from production 
 * Therefore, collectstatic will ignore media files.
 After database import, media files have to be collected manually
   ```
-  mv /var/www/<projname>/src/run/media /var/www/<projname>
+  mv /var/www/<projname>/src/media /var/www/<projname>
   ``` 
 Ensure media folder is included in apache configuration file
 
