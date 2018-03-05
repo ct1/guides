@@ -24,7 +24,7 @@ Transfer database dump to production
   ``` 
 
 ### 3. Initialize database
-Ensure an empty destination database. Disconnect all conections from production database. Drop the existing database. The empty database should be created using "template0" as the base.
+Ensure an empty destination database. Disconnect all conections from production database (e.g. pgAdmin). Drop the existing database. The empty database should be created using "template0" as the base.
   ```
   su - postgres
   dropdb <dbname>
