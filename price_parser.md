@@ -25,33 +25,33 @@ Price parser methodology
 
 ### Parsing at extraction level
 1. Basic text cleaning
-    Text fields
+Text fields
     ```
     Convert to title format (first capital letter)
     ``` 
-    Numeric fields
+Numeric fields
     ```
-    Convert numeric strings to european decimal system ( comma-to-dot ) 
+Convert numeric strings to european decimal system ( comma-to-dot ) 
     ``` 
-    Uniformize text, separate words
+2. Uniformize text, separate words
 
-2. Separate brand from title if required
-    Determine list of words.
-    Look for brand pattern.
-    Break title into title + brand.
+3. Separate brand from title if required
+Determine list of words.
+Look for brand pattern.
+Break title into title + brand.
 
-3. Separate format from title if required
-    Determine list of words.
-    Look for format pattern.
-    Break title into title + format.
+4. Separate format from title if required
+Determine list of words.
+Look for format pattern.
+Break title into title + format.
 
 
 ### Parsing at deploying level
 
 1. Uniform unit measures
-    Maintain unitMeasures dictionary by retailer.
+Maintain unitMeasures dictionary by retailer.
 
 2. Simplify format, remove unneeded
-    Maintain replace dictionary by retailer.
-    Maintain unneeds dictionary by retailer
+Maintain replace dictionary by retailer.
+Maintain unneeds dictionary by retailer
 
