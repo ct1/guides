@@ -29,9 +29,9 @@ Text fields
     ```
     Convert to title format (first capital letter)
     ``` 
-Numeric fields
+    Numeric fields
     ```
-Convert numeric strings to european decimal system ( comma-to-dot ) 
+    Convert numeric strings to european decimal system ( comma-to-dot ) 
     ``` 
 2. Uniformize text, separate words
 
