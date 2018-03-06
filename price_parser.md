@@ -38,16 +38,12 @@ Price parser methodology
 
 #### 2. Separate brand from title if required
 Determine list of words.
-
 Look for brand pattern.
-
 Break title into title + brand.
 
 #### 3. Separate format from title if required
 Determine list of words.
-
 Look for format pattern.
-
 Break title into title + format.
 
 
@@ -58,6 +54,5 @@ Maintain unitMeasures dictionary by retailer.
 
 #### 2. Simplify format, remove unneeded
 Maintain replace dictionary by retailer.
-
 Maintain unneeds dictionary by retailer
 
