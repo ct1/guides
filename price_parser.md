@@ -25,7 +25,7 @@ Price parser methodology
 
 ### Parsing at extraction level
 1. Basic text cleaning
-Text fields
+    Text fields
     ```
     Convert to title format (first capital letter)
     ``` 
