@@ -24,8 +24,7 @@ Price parser methodology
     Queries using this filter will generally perform full table scans, which can be slow on large tables.
 
 ### Parsing at extraction level
-
-#### 1. Basic text cleaning
+1. Basic text cleaning
     Text fields
     ```
     Convert to title format (first capital letter)
@@ -36,23 +35,23 @@ Price parser methodology
     ``` 
     Uniformize text, separate words
 
-#### 2. Separate brand from title if required
-Determine list of words.
-Look for brand pattern.
-Break title into title + brand.
+2. Separate brand from title if required
+    Determine list of words.
+    Look for brand pattern.
+    Break title into title + brand.
 
-#### 3. Separate format from title if required
-Determine list of words.
-Look for format pattern.
-Break title into title + format.
+3. Separate format from title if required
+    Determine list of words.
+    Look for format pattern.
+    Break title into title + format.
 
 
 ### Parsing at deploying level
 
-#### 1. Uniform unit measures
-Maintain unitMeasures dictionary by retailer.
+1. Uniform unit measures
+    Maintain unitMeasures dictionary by retailer.
 
-#### 2. Simplify format, remove unneeded
-Maintain replace dictionary by retailer.
-Maintain unneeds dictionary by retailer
+2. Simplify format, remove unneeded
+    Maintain replace dictionary by retailer.
+    Maintain unneeds dictionary by retailer
 
