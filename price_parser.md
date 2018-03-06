@@ -37,22 +37,27 @@ Price parser methodology
     Uniformize text, separate words
 
 #### 2. Separate brand from title if required
-Determine list of words
-Look for brand pattern
-Break title into title + brand
+Determine list of words.
+
+Look for brand pattern.
+
+Break title into title + brand.
 
 #### 3. Separate format from title if required
-Determine list of words
-Look for format pattern
-Break title into title + format
+Determine list of words.
+
+Look for format pattern.
+
+Break title into title + format.
 
 
 ### Parsing at deploying level
 
 #### 1. Uniform unit measures
-Maintain unitMeasures dictionary by retailer
+Maintain unitMeasures dictionary by retailer.
 
 #### 2. Simplify format, remove unneeded
-Maintain replace dictionary by retailer
+Maintain replace dictionary by retailer.
+
 Maintain unneeds dictionary by retailer
 
