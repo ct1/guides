@@ -66,7 +66,7 @@ Process brand field
 
 
 ### Regex basics
-Identifiers
+1. Identifiers
     ```
     \d any number
     \D anything but a number
@@ -79,7 +79,7 @@ Identifiers
     \. a period
     ``` 
 
-Modifiers
+2. Modifiers
     ```
     {1,3} we're expecting 1-3
     +  match one or more
@@ -92,7 +92,7 @@ Modifiers
     {x} expecting x amount
     ```
 
-White space characters:
+3. White space characters:
     ```
     \n  new line
     \s  space
@@ -102,7 +102,7 @@ White space characters:
     \r  return
     ``` 
 
-Example
+4. Example
     ```
     import re
 
