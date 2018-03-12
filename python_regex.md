@@ -11,8 +11,8 @@ Price parser methodology
     \D  anything but a number
     \s  any space
     \S  anything but a space
-    \s  any character
-    \S  anything but a character
+    \w  any character
+    \W  anything but a character
     .   any character, except for a newline
     \b  the white space around words
     \.  a period

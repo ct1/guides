@@ -1,6 +1,6 @@
 # Price parser
 
-Price parser methodology
+Price parser approach
 
 ----------
 
@@ -25,40 +25,88 @@ Price parser methodology
 
 
 ### Parsing at extraction level
-1. Basic text cleaning.
+1. Categ1-3
     ```
-    Text
-    Convert to capitalize case (first capital letter)
-    text.capitalize()
-
-    Numeric
-    Convert to db decimal format ( comma-to-dot ) 
+    Capital case
     ``` 
 
-2. Uniform text, separate words
-    
-    Inject spaces where needed, mutiple spaces to single space
-
-3. Separate brand from title if required
-
-    Search for brand pattern and split title.
-    Pattern can vary by retailer
-
-4. Separate format from title if required
-
-    Search for format pattern and split title.
-    Pattern can vary by retailer
-
-
-### Parsing at deploying level
-
-Process pack field
-    Standardize field (all retailers)
+2. Title
     ```
-    Remove text terms at the start
-    Beautify numbers
-    Standardize unit measures terminology
+    Capital case
+    Numeric compatible with database
+    Separated words
+    ``` 
+3. Brand
+    ```
+    Capital case
+    Separated words
+    ``` 
+4. Pack
+    ```
+    None
     ``` 
 
-Process brand field
+4. Price
+    ```
+    Numeric compatible with database
+    remove euro symbol
+    remove parenthesis
+    ``` 
+5. Price
+    ```
+    Numeric compatible with database
+    remove parenthesis
+    ``` 
 
+
+
+### Parsing at importing level
+1. Categ1-3
+    ```
+    None
+    ``` 
+
+1. Title
+    Pack splitting (selective)
+    ```
+    1 - double split term process (left to right)
+    2 - split at expression
+    3 - split at term
+    4 - split at <number> <unit measure> pattern (right to left)
+    ``` 
+    Brand splitting (selective)
+    ```
+    split uppercase terms
+    Capital case
+    ``` 
+    Brand remove (selective)
+    ```
+    remove brand from title if title wan't become null
+    ``` 
+
+2. Brand
+    ```
+    None
+    ``` 
+
+3. Pack
+    ```
+    1 - Remove from expressions
+    2 - Remove expressions
+    3 - Remove terms
+    4 - Replace expressions
+    5 - Replace terms
+    6 - Beautify floats
+    7 - Beautify ints
+    8 - Remove after expressions
+    ``` 
+
+4. Price
+    ```
+    None
+    ``` 
+
+5. Price_ref
+    ```
+    None
+    ``` 
