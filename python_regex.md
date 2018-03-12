@@ -1,6 +1,6 @@
-# Price parser
+# Python regex
 
-Price parser methodology
+Regex basic tutorial
 
 ----------
 
