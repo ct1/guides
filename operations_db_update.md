@@ -30,11 +30,31 @@ Database updating process
     The parser pre-processes the title field with two objectives
     1 - uniform syntax by country
     2 - generate article search terms
+    Monitor parsing results
+    if necessary
+    - update language
+    - update parsing lists
+    re-run parser
     ``` 
 
 4. Split
     ```
     Generate pack information for articles
-    Where applicable split title into title and packaging info
-    Where applicable split title into title and brand info
+    Upon parsing success, launch the splitting process
+    - where applicable split title -> title + packaging
+    Where applicable split title -> title + brand
+    ``` 
+
+### Information process
+1. Extract, import, parse and split
+    ```
+    Similar to weekly processes but processed every 3 months
+    ``` 
+2. Product codes links
+    ```
+    TBD
+    ``` 
+3. Product info links
+    ```
+    TBD
     ``` 
