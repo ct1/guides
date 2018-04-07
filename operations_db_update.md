@@ -4,57 +4,84 @@ Database updating process
 
 ----------
 
+### Language definition
+1. Grammar and syntax
+    ```
+    Country
+    Define vocabulary based on the natural language (NLTK)
+    Customize parts-of-speech wording 
+    Customize phrases or constituents
+    Customize hierarchical syntactic structures (parse trees)
+
+    Source
+    Sources inherit country properties and customize them
+    Customize sentence expressions
+    ```
+
 ### Weekly process
 1. Extract
     ```
-    Extracts data from sources to data files
+    Extracts data from sources
     Per country, launch extracting per source
     Individual extracters per source
+    Extractors generate product files
     Supervise individual results (relaunch process until success)
     Confirm success activating 'country green light' for next steps
     ``` 
 
 2. Import
     ```
-    Imports country extracted files into the database
-    Upon each 'country green light', launch importer
-    Keep base base files until next cycle
-    Database mantain all weekly cyle imports
+    Imports country extracts into DB
+    Upon each 'country green light', launch importer by country
+    Extract files are kept until the next extracting cycle
+    Database keeps all weekly extracts
     ```
 
 3. Parse:
     ```
     Pre-process titles for each contry/retailer
     Language by country, therefore parsing by country
-    Parsing is exceuted upon importing
-    The parser pre-processes the title field with two objectives
-    1 - uniform syntax by country
-    2 - generate article search terms
-    Monitor parsing results
-    if necessary
-    - update language
-    - update parsing lists
-    re-run parser
-    ``` 
+    Parsing is executed automatically upon importing
+    Parser pre-processes title to
+    1 - create uniform syntax by country
+    2 - generate smart search terms
+
+    Each country has .yaml configuration file
+    Each source has its own .yaml configuration file
+
+    Steps by source
+    1 - pre-process sentence
+        - token merges for syntax conventions ('200 w' -> '200w', '100 120 gr' -> '100-120 gr', '10 x 4' -> '10x4', 'lr 03' -> 'lr03')
+        - token merges (two or more) for custom expressions ('h & s' -> 'h&s')
+        - element modifiers for vocabulary conformity 
+            - tokens ('unidades' -> 'uni')
+            - sentence ('d . o . m' -> 'd.o.m.')
+    2 - generate search terms
+        Process executed at token level
+        - first preserve the future removal of some stop_words by  token merges (['2', 'en', '1'] -> ['2 en 1'])
+        - remove stop_words for the country laguage
+        - filter punctuation
+        - stem tokens
+    ```
 
 4. Split
     ```
-    Generate pack information for articles
     Upon parsing success, launch the splitting process
-    - where applicable split title -> title + packaging
-    Where applicable split title -> title + brand
+    Where applicable split title into
+    -> title + packaging
+    -> title + brand
     ``` 
 
 ### Information process
 1. Extract, import, parse and split
     ```
-    Similar to weekly processes but processed every 3 months
+    Similar to weekly processes, processed every 3-4 months
     ``` 
 2. Product codes links
     ```
-    TBD
+    Link reference codes to source products
     ``` 
 3. Product info links
     ```
-    TBD
+    Link reference product information to source products
     ``` 
