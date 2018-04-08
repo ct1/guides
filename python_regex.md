@@ -26,8 +26,10 @@ Regex basic tutorial
     ( )     - Group
 
     Sample Regexs
-
     [a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+
+
+    MetaCharacters (Need to be escaped):
+    .[{()\^$|?*+
     ``` 
 
 2. Quantifiers
