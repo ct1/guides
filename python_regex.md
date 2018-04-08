@@ -30,7 +30,6 @@ Regex basic tutorial
 
     MetaCharacters (Need to be escaped):
     .[{()\^$|?*+
-
     ``` 
 
 2. Quantifiers
