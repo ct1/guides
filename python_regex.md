@@ -7,28 +7,36 @@ Regex basic tutorial
 ### Regex basics
 1. Identifiers
     ```
-    \d  any number
-    \D  anything but a number
-    \s  any space
-    \S  anything but a space
-    \w  any character
-    \W  anything but a character
-    .   any character, except for a newline
-    \b  the white space around words
-    \.  a period
+    .       - Any Character Except New Line
+    \d      - Digit (0-9)
+    \D      - Not a Digit (0-9)
+    \w      - Word Character (a-z, A-Z, 0-9, _)
+    \W      - Not a Word Character
+    \s      - Whitespace (space, tab, newline)
+    \S      - Not Whitespace (space, tab, newline)
+
+    \b      - Word Boundary
+    \B      - Not a Word Boundary
+    ^       - Beginning of a String
+    $       - End of a String
+
+    []      - Matches Characters in brackets
+    [^ ]    - Matches Characters NOT in brackets
+    |       - Either Or
+    ( )     - Group
+
+    Sample Regexs
+
+    [a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+
     ``` 
 
-2. Modifiers
+2. Quantifiers
     ```
-    {1,3} we're expecting 1-3
-    +   match one or more
-    ?   match zero or 1
-    *   match zero or more
-    $   match the end of a string
-    ^   matching the beginning of a string
-    |   either or
-    []  range or 'variance'  [A-Z]   [1-5a-qA-Z]
-    {x} expecting x amount
+    *       - 0 or More
+    +       - 1 or More
+    ?       - 0 or One
+    {3}     - Exact Number
+    {3,4}   - Range of Numbers (Minimum, Maximum)
     ```
 
 3. White space characters:

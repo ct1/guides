@@ -58,8 +58,8 @@ Database updating process
             - sentence ('d . o . m' -> 'd.o.m.')
     2 - generate search terms
         Process executed at token level
-        - first preserve the future removal of some stop_words by  token merges (['2', 'en', '1'] -> ['2 en 1'])
-        - remove stop_words for the country laguage
+        - first preserve the removal of some stop_words by token merges (['2', 'en', '1'] -> ['2 en 1'])
+        - remove country's stop_words
         - filter punctuation
         - stem tokens
     ```
@@ -70,6 +70,10 @@ Database updating process
     Where applicable split title into
     -> title + packaging
     -> title + brand
+
+    Steps by source
+    Identify pack phrases
+    extract pack phrases
     ``` 
 
 ### Information process
@@ -79,7 +83,7 @@ Database updating process
     ``` 
 2. Product codes links
     ```
-    Link reference codes to source products
+    Common products must have the same 
     ``` 
 3. Product info links
     ```
