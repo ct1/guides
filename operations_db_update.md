@@ -37,44 +37,19 @@ Database updating process
     Database keeps all weekly extracts
     ```
 
-3. Parse:
+3. Parse & Split:
     ```
-    Pre-process titles for each contry/retailer
+    Pre-process titles, packs, brand, offers for each contry/retailer
     Language by country, therefore parsing by country
-    Parsing is executed automatically upon importing
-    Parser pre-processes title to
-    1 - create uniform syntax by country
-    2 - generate smart search terms
-
-    Each country has .yaml configuration file
-    Each source has its own .yaml configuration file
-
-    Steps by source
-    1 - pre-process sentence
-        - token merges for syntax conventions ('200 w' -> '200w', '100 120 gr' -> '100-120 gr', '10 x 4' -> '10x4', 'lr 03' -> 'lr03')
-        - token merges (two or more) for custom expressions ('h & s' -> 'h&s')
-        - element modifiers for vocabulary conformity 
-            - tokens ('unidades' -> 'uni')
-            - sentence ('d . o . m' -> 'd.o.m.')
+    Parser pre-processes to
+    1 - create uniform vocabulary and syntax
     2 - generate search terms
-        Process executed at token level
-        - first preserve the removal of some stop_words by token merges (['2', 'en', '1'] -> ['2 en 1'])
-        - remove country's stop_words
-        - filter punctuation
-        - stem tokens
-    ```
-
-4. Split
-    ```
     Upon parsing success, launch the splitting process
-    Where applicable split title into
+    Where applicable, split title into:
     -> title + packaging
     -> title + brand
+    ```
 
-    Steps by source
-    Identify pack phrases
-    extract pack phrases
-    ``` 
 
 ### Information process
 1. Extract, import, parse and split
@@ -83,9 +58,9 @@ Database updating process
     ``` 
 2. Product codes links
     ```
-    Common products must have the same 
+    TBD
     ``` 
 3. Product info links
     ```
-    Link reference product information to source products
+    TBD
     ``` 

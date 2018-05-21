@@ -1,8 +1,101 @@
-# Price parser
+# Product information parser
 
-Price parser approach
+Product information parsing approach
 
 ----------
+
+The parse process has several objectives
+1. Uniform language at country level
+2. Develop a search algorithm at country level
+3. Simplify product identification
+4. Share information among common products
+
+
+### Approach
+Process data aggregated at country level
+Use NLTK (Natural Language Toolkit) technologies for language analysis
+Develop own language using a context-free grammar and custom lexical categories
+
+Title and pack information have different treatments
+1. Title
+    Parsed using portuguese/spanish taggers trained for the country language
+    Through word-tokenizing segment title search terms
+2. Pack
+    Parsed using own language (vocabulary and contex-free grammar)
+    Pack serach tokens are identified in the parsng process
+3. Brand
+    No specific process but key for the classifying process
+
+
+### Process
+1. Clean data and uniformize vocabulary
+This step has general and token-specific processes
+2. Classify products
+There is too much information in product description, we need to identify the relevant and discard the remaining
+3. Identifiy common products on multiple sources
+A classifier algorithm helps to identify similar products on different sources
+
+
+### Language
+Common language help to relate products from differnt sources.
+Steps for the language development
+    ```
+    Develop lexical categories
+    Develop a context-free grammar 
+    ```
+
+Use NLTK (Natural Language Tool Kit) to parse text at country level
+    ```
+    Use countrie's corpus to train tagger models
+    Apply taggers to determine part-of-speech for sentences
+    ```
+
+#### Title parser
+First read tagged sentence from a corpus.
+Then choose tagger and train it. There are more fancy options but we use N-gram taggers.
+Unigram tagger doesn’t take the ordering of the words into account.
+Bigram tagger do care about the order of the words, so it considers the context of each word by analyzing it by pairs. 
+    ```
+    from nltk.corpus import cess_esp as cess
+    from nltk import UnigramTagger as ut
+    from nltk import BigramTagger as bt
+
+    # Read the corpus into a list, 
+    # each entry in the list is one sentence.
+    cess_sents = cess.tagged_sents()
+
+    # Train the unigram tagger
+    uni_tag = ut(cess_sents)
+
+    sentence = "Hola , esta foo bar ."
+
+    # Tagger reads a list of tokens.
+    uni_tag.tag(sentence.split(" "))
+
+    # Split corpus into training and testing set.
+    train = int(len(cess_sents)*90/100) # 90%
+
+    # Train a bigram tagger with only training data.
+    bi_tag = bt(cess_sents[:train])
+
+    # Evaluates on testing data remaining 10%
+    bi_tag.evaluate(cess_sents[train+1:])
+
+    # Using the tagger.
+    bi_tag.tag(sentence.split(" "))
+
+    ```
+
+
+### Tokenize for non-english
+Spanish tokenizer is meant for sentence parsing (not word)
+    ```
+    import nltk.databse
+    sp_tokenizer = nltk.data.load('tokenizers/punkt/spanish.pickle')
+    sp_tokenizer.tokenize(text)
+    ```
+
+
 
 ### Postgresql setup
 1. Activate unaccent PostgreSQL module 
@@ -23,90 +116,3 @@ Price parser approach
     `Warning`
     Queries using this filter will generally perform full table scans, which can be slow on large tables.
 
-
-### Parsing at extraction level
-1. Categ1-3
-    ```
-    Capital case
-    ``` 
-
-2. Title
-    ```
-    Capital case
-    Numeric compatible with database
-    Separated words
-    ``` 
-3. Brand
-    ```
-    Capital case
-    Separated words
-    ``` 
-4. Pack
-    ```
-    None
-    ``` 
-
-4. Price
-    ```
-    Numeric compatible with database
-    remove euro symbol
-    remove parenthesis
-    ``` 
-5. Price
-    ```
-    Numeric compatible with database
-    remove parenthesis
-    ``` 
-
-
-
-### Parsing at importing level
-1. Categ1-3
-    ```
-    None
-    ``` 
-
-1. Title
-    Pack splitting (selective)
-    ```
-    1 - double split term process (left to right)
-    2 - split at expression
-    3 - split at term
-    4 - split at <number> <unit measure> pattern (right to left)
-    ``` 
-    Brand splitting (selective)
-    ```
-    split uppercase terms
-    Capital case
-    ``` 
-    Brand remove (selective)
-    ```
-    remove brand from title if title wan't become null
-    ``` 
-
-2. Brand
-    ```
-    None
-    ``` 
-
-3. Pack
-    ```
-    1 - Remove from expressions
-    2 - Remove expressions
-    3 - Remove terms
-    4 - Replace expressions
-    5 - Replace terms
-    6 - Beautify floats
-    7 - Beautify ints
-    8 - Remove after expressions
-    ``` 
-
-4. Price
-    ```
-    None
-    ``` 
-
-5. Price_ref
-    ```
-    None
-    ``` 
