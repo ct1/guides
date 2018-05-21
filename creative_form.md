@@ -31,7 +31,7 @@ Structure of a service:
     ```
     getDataForLayout1   Function to define parameters passed to the requested page
     ``` 
-### app.component
+### Main menu - app.component
 app.component manages main menu
 On selection, calls ItemsPage with selected page id (page.theme passed as componentName)
 
@@ -42,8 +42,8 @@ Receives a page id
 2. gets pages and title from the service (used by html page to produce a sub-menu)
 3. On selection
     ```
-    requests itself if selected option was menu (has key listView on his page)
-    requests a page passing arguments: father service, current page
+    requests itself, if selected option was menu (has key listView on his page)
+    requests a page, passing arguments: father service, current page
     ```
 
 ### Pages
