@@ -3,28 +3,28 @@
 ----------
 
 ### Rotating proxies
-
-1. Configure rotating-proxies in scrapy
 Install scrapy-rotating-proxies module
-    ```
-    pip install scrapy-rotating-proxies
-    ```
+```
+pip install scrapy-rotating-proxies
+```
+
 In your scrapy project settings file add configuration
-    ```
-    ROTATING_PROXY_LIST_PATH = '/Users/ctavares/dev/scrapy/<projpath>/proxies.txt'
+```
+ROTATING_PROXY_LIST_PATH = '/Users/ctavares/dev/scrapy/<projpath>/proxies.txt'
 
-    ...
+...
 
-    DOWNLOADER_MIDDLEWARES = {
-        'rotating_proxies.middlewares.RotatingProxyMiddleware': 610,
-        'rotating_proxies.middlewares.BanDetectionMiddleware': 620,
-    #    'eci.middlewares.EciDownloaderMiddleware': 543,
-    }
-    ```
-Configure maximun retries per request (default=5) if you want
-    ```
-    ROTATING_PROXY_PAGE_RETRY_TIMES = 10
-    ```
+DOWNLOADER_MIDDLEWARES = {
+    'rotating_proxies.middlewares.RotatingProxyMiddleware': 610,
+    'rotating_proxies.middlewares.BanDetectionMiddleware': 620,
+#    'eci.middlewares.EciDownloaderMiddleware': 543,
+}
+```
+
+If needed, configure maximun retries per request (default=5)
+```
+ROTATING_PROXY_PAGE_RETRY_TIMES = 10
+```
 
 Home project scrapy-rotating-proxies [here](https://github.com/TeamHG-Memex/scrapy-rotating-proxies)
 
