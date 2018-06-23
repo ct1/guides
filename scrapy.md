@@ -3,7 +3,7 @@
 ----------
 
 ### Rotating proxies
-Install scrapy-rotating-proxies module
+1. Install scrapy-rotating-proxies module
 ```
 pip install scrapy-rotating-proxies
 ```
