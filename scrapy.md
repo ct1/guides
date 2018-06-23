@@ -57,4 +57,4 @@ Scrapy middleware to handle javascript pages using selenium.
     }
     ```
 
-4. Usage refer to the scrapy_selenium project page [Here](https://github.com/clemfromspace/scrapy-selenium.md) 
+4. Usage refer to the scrapy_selenium project page [Here](https://github.com/clemfromspace/scrapy-selenium) 
