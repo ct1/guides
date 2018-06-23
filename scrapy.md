@@ -65,6 +65,7 @@ Scrapy middleware to handle javascript pages using selenium.
 ### Project references
 
 Home project scrapy-rotating-proxies [here](https://github.com/TeamHG-Memex/scrapy-rotating-proxies)
+
 Home project proxy-lists [here](https://github.com/chill117/proxy-lists)
 
 Home project scrapy_selenium project page [Here](https://github.com/clemfromspace/scrapy-selenium)
