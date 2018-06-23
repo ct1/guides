@@ -25,6 +25,9 @@ Configure maximun retries per request (default=5) if you want
     ROTATING_PROXY_PAGE_RETRY_TIMES = 10
     ```
 
+Home project scrapy-rotating-proxies [here](https://github.com/TeamHG-Memex/scrapy-rotating-proxies)
+
+
 2. Create proxies list
 Use an existing javascript library. Install module globally via npm
     ```
@@ -34,6 +37,9 @@ Create file 'proxies.txt' in current directory
     ```
     proxy-lists getProxies --sources-white-list="gatherproxy,sockslist"
     ```
+
+Home project proxy-lists [here](https://github.com/chill117/proxy-lists)
+
 
 ### Scrapy with selenium
 Scrapy middleware to handle javascript pages using selenium.
