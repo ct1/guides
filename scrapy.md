@@ -82,7 +82,7 @@ First cd into your project's root, then deploy your project
     ```
     Edit scrapy.cfg and uncomment url in the deploy section
     ```
-Create a new deploy group for remote execution
+3. Create a new deploy group for remote execution
     ```
     [deploy]
     url = http://46.101.85.44
@@ -90,23 +90,22 @@ Create a new deploy group for remote execution
     password = secret
     project = yourproject
     ```
-Finally deploy your project
+4. Finally deploy your project
     ```
     scrapyd-deploy -p <project> 
     ```
 
-Repeat this process for all your projects. This completes project uploading to the server
+5. Repeat this process for all your projects. This completes project uploading to the server
 
-3. Submit job in the development machine
+6. Submit job in the development machine
     ```
     cd ~/Dev/scrapy/es
 
     curl http://localhost:6800/schedule.json -d project=aldi -d spider=aldi -o aldi.json
     ```
-The output file is created in the current directory
+The output scraped files are created in the current directory
 
-
-4. Visit http://localhost:6800 host to monitor job progress
+7. Visit http://localhost:6800 host to monitor job progress
 
 
 
