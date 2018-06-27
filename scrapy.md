@@ -62,14 +62,14 @@ Scrapy middleware to handle javascript pages using selenium.
 4. Usage refer to the scrapy_selenium project [Here](https://github.com/clemfromspace/scrapy-selenium)
 
 
-### Deploying spiders - Scrapyd
+### Deploying - Scrapyd server
 Scrapyd is a service for running Scrapy spiders on a server
 1. Installation
     ```
     pip install scrapyid
     ```
 
-### Deploying spiders - Scrapyd-client
+### Deploying - Scrapyd-client
 Scrapyd-client is a client for scrapyd. It provides the scrapyd-deploy utility to deploy your project to a scrapyd server.
 
 1. Scrapyd-client installation
@@ -78,12 +78,23 @@ Scrapyd-client is a client for scrapyd. It provides the scrapyd-deploy utility t
     ```
 
 2. Deploy the spider to the scrapyd server
-Go to your scrapy project -> directory where scrapy.cfg is found. 
+First cd into your project's root, then deploy your project
     ```
     Edit scrapy.cfg and uncomment url in the deploy section
-
+    ```
+Create a new deploy group for remote execution (if needed)
+    ```
+    [deploy]
+    url = http://46.101.85.44
+    username = scrapy
+    password = secret
+    project = yourproject
+    ```
+Finally deploy your project
+    ```
     scrapyd-deploy -p <project> 
     ```
+
 Repeat this process for all your projects. This completes project uploading to the server
 
 3. Submit job in the development machine
@@ -106,3 +117,8 @@ Home project scrapy-rotating-proxies [here](https://github.com/TeamHG-Memex/scra
 Home project proxy-lists [here](https://github.com/chill117/proxy-lists)
 
 Home project scrapy_selenium project page [Here](https://github.com/clemfromspace/scrapy-selenium)
+
+
+Home project scrapyd project page [Here](https://github.com/scrapy/scrapyd)
+
+Home project scrapyd-client project page [Here](https://github.com/scrapy/scrapyd-client)
