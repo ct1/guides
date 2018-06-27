@@ -82,6 +82,7 @@ First cd into your project's root, then deploy your project
     ```
     Edit scrapy.cfg and uncomment url in the deploy section
     ```
+
 Create a new deploy group for remote execution (if needed)
     ```
     [deploy]
@@ -90,6 +91,7 @@ Create a new deploy group for remote execution (if needed)
     password = secret
     project = yourproject
     ```
+
 Finally deploy your project
     ```
     scrapyd-deploy -p <project> 
