@@ -63,50 +63,201 @@ Scrapy middleware to handle javascript pages using selenium.
 
 
 ### Deploying - Scrapyd server
-Scrapyd is a service for running Scrapy spiders on a server
+Scrapyd is a service for running Scrapy spiders on a server.
 1. Installation
     ```
     pip install scrapyid
     ```
+Must be always running.
 
 ### Deploying - Scrapyd-client
-Scrapyd-client is a client for scrapyd. It provides the scrapyd-deploy utility to deploy your project to a scrapyd server.
+Scrapyd-client is a client for scrapyd. Provides the scrapyd-deploy utility to deploy projects to scrapyd server.
 
 1. Scrapyd-client installation
     ```
     pip install scrapyid-client
     ```
 
-2. Deploy the spider to the scrapyd server
-First cd into your project's root, then deploy your project
+### Deploying - setup to deploy
+
+1. Don't need to create scrapyd.cfg. Scrapyd defaults are fine
+2. Need to define file output name on each project settings
+Output files created on folder data
     ```
-    Edit scrapy.cfg and uncomment url in the deploy section
+    FEED_URI='/Users/ctavares/Dev/scrapy/data/supercor.json'
     ```
-3. Create a new deploy group for remote execution
+3. Spiders make no management to backup previous runs. Files management done on scripts
+
+### Deploying - spider tasks script
+Script makes file-backup management on previous runs, cleans unnecessary scrapy files (backup/eggs), and launches spider curl processes.
     ```
-    [deploy]
-    url = http://46.101.85.44
-    username = scrapy
-    password = secret
-    project = yourproject
-    ```
-4. Finally deploy your project
-    ```
-    scrapyd-deploy -p <project> 
+    #!/bin/bash
+
+    # script to launch spider for country/project. Requires two arguments
+    COUNTRY=$1
+    PROJ=$2
+
+    SCRAPY_DIR="/Users/ctavares/Dev/scrapy"
+    PROJ_DIR=$SCRAPY_DIR/$COUNTRY/$2
+    FILE_BACKUP=$SCRAPY_DIR/data/$2_old.json
+    FILE_OUT=$SCRAPY_DIR/data/$2.json
+    LOG=$SCRAPY_DIR/log
+
+    FINISHED="false"
+
+    cd $PROJ_DIR
+
+    echo 'PROJ_DIR: ' $PROJ_DIR > $LOG
+    echo 'FILE_OUT' $FILE_OUT >> $LOG
+    echo 'FILE_BACKUP: ' $FILE_BACKUP >> $LOG
+
+    # loop until launch or cancel
+    while  [  "$FINISHED" != "true" ]; do
+
+        # if scrpyd is running launch curl process
+        if [[ $(ps axo pid,command | grep "[s]crapyd") ]]; then
+
+            # if previous backup exists remove it
+            if [ -f $FILE_BACKUP ]; then
+               rm $FILE_BACKUP
+            fi
+
+            # if previous spider result exists rename it
+            if [ -f $FILE_OUT ]; then
+               mv $FILE_OUT $FILE_BACKUP
+            fi
+
+            # remove previous eggs and logs files
+            rm $SCRAPY_DIR/eggs/$PROJ/* 
+            rm $SCRAPY_DIR/logs/$PROJ/$PROJ/*
+
+            # deploy project
+            /Library/Frameworks/Python.framework/Versions/3.5/bin/scrapyd-deploy -p $PROJ
+            # launch deamon spider
+            curl http://localhost:6800/schedule.json -d project=$PROJ -d spider=$PROJ
+
+            FINISHED="true"
+            # notify spider launched
+            /usr/local/bin/terminal-notifier -message "Launched spider $1/$2" -title "Spider"
+
+        else
+            # popup
+            ACTION="$(osascript -e 'display dialog "Missing scrapyd. Run scrapy directly?" buttons {"Repeat","Yes","Later"} default button "Later"')"
+
+            if [ "$ACTION" = "button returned:Later" ]; then
+                FINISHED="true"
+
+            else
+                if [ "$ACTION" = "button returned:Yes" ]; then
+
+                    # if previous backup exists remove it
+                    if [ -f $FILE_BACKUP ]; then
+                       rm $FILE_BACKUP
+                    fi
+
+                    # if previous spider result exists rename it
+                    if [ -f $FILE_OUT ]; then
+                       mv $FILE_OUT $FILE_BACKUP
+                    fi
+
+                    # remove previous eggs and logs files
+                    rm $SCRAPY_DIR/eggs/$PROJ/* 
+                    rm $SCRAPY_DIR/logs/$PROJ/$PROJ/*
+
+                    /usr/local/bin/terminal-notifier -message "Launched scrapy for $1/$2" -title "spider"
+                    /Library/Frameworks/Python.framework/Versions/3.5/bin/scrapy crawl $PROJ >> $LOG
+
+                    FINISHED="true"
+
+                else
+                    # irrelevant if -> only to prevent error messages
+                    if [ "$ACTION" = "button returned:Repeat" ]; then
+                        FINISHED="false"
+                    fi
+                fi
+            fi
+        fi
+    done
     ```
 
-5. Repeat this process for all your projects. This completes project uploading to the server
-
-6. Submit job in the development machine
+Ensure that the script is executable
     ```
-    cd ~/Dev/scrapy/es
-
-    curl http://localhost:6800/schedule.json -d project=aldi -d spider=aldi -o aldi.json
+    chmod +x ~/Dev/scrapy/launchd_spider.sh
     ```
-The output scraped files are created in the current directory
 
-7. Visit http://localhost:6800 host to monitor job progress
+How it works?
+- If scrapyd running a deamon process for the spider project is launched.
 
+- If scrapyd is not running a popup is launched. Possibilities are:
+
+    1) launch scrapyid in a terminal session and reply Repeat. the script validates that now srapyd is running and launch the deamon process for spider.
+
+    2) execute scrapy in background without scrapyid. Confirm porcess is running with:
+    ```
+    sudo ps -e | grep scrapy
+    ```
+
+4. Visit http://localhost:6800 host to monitor job progress on spiders execution. Only works for the scrapyd option
+
+
+### Deploying - Spider scheduler
+
+Spiders sschedule is managed through launchd. Each spider has a .plist file controlling it's schedule launch.
+
+1. Each spider is launched on a different day-of-the-week/hour
+
+.plist file example
+    ```
+    <?xml version="1.0" encoding="UTF-8"?>
+    <!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+    <plist version="1.0">
+        <dict>
+
+            <key>Label</key>
+                <string>com.es.spider6.shoppingadvisor</string>
+
+            <key>ProgramArguments</key>
+                <array>
+                    <string>/Users/ctavares/Dev/scrapy/launchd_spider.sh</string>
+                    <string>es</string>
+                    <string>supercor</string>
+                </array>
+
+            <key>StartCalendarInterval</key>
+                <array>
+                    <!--  Weekdays are 1 - 5; Sunday is 0 and saturday is 7   -->
+                    <dict>
+                        <key>Weekday</key>
+                            <integer>7</integer>
+                        <key>Hour</key>
+                            <integer>9</integer>
+                        <key>Minute</key>
+                            <integer>0</integer>
+                    </dict>
+                </array>
+        </dict>
+    </plist>
+    ```
+
+2. plists location
+plsts can be loaded at machine boot, any user login or a certain user login.
+It is currently configured to be loaded with a certain user login. This means
+the plists files are located at
+    ```
+    ~/Library/LaunchAgents
+    ```
+
+3. Manage plists
+Load plist
+    ```
+    # -w flag permanently adds the plist to the Launch Daemon
+    launchctl load -w ~/Library/LaunchAgents/com.es.spider6.shoppingadvisor.plist
+    ```
+Unload plist
+    ```
+    # # -w flag permanently remove the plist to the Launch Daemon
+    launchctl unload ~/Library/LaunchAgents/com.es.spider6.shoppingadvisor.plist
+    ```
 
 
 ### Project references
