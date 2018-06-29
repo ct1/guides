@@ -101,15 +101,11 @@ Script makes file-backup management on previous runs, cleans unnecessary scrapy 
     PROJ_DIR=$SCRAPY_DIR/$COUNTRY/$2
     FILE_BACKUP=$SCRAPY_DIR/data/$2_old.json
     FILE_OUT=$SCRAPY_DIR/data/$2.json
-    LOG=$SCRAPY_DIR/log
+    #LOG=$SCRAPY_DIR/log
 
     FINISHED="false"
 
     cd $PROJ_DIR
-
-    echo 'PROJ_DIR: ' $PROJ_DIR > $LOG
-    echo 'FILE_OUT' $FILE_OUT >> $LOG
-    echo 'FILE_BACKUP: ' $FILE_BACKUP >> $LOG
 
     # loop until launch or cancel
     while  [  "$FINISHED" != "true" ]; do
@@ -165,7 +161,7 @@ Script makes file-backup management on previous runs, cleans unnecessary scrapy 
                     rm $SCRAPY_DIR/logs/$PROJ/$PROJ/*
 
                     /usr/local/bin/terminal-notifier -message "Launched scrapy for $1/$2" -title "spider"
-                    /Library/Frameworks/Python.framework/Versions/3.5/bin/scrapy crawl $PROJ >> $LOG
+                    /Library/Frameworks/Python.framework/Versions/3.5/bin/scrapy crawl $PROJ
 
                     FINISHED="true"
 
@@ -255,7 +251,7 @@ Load plist
     ```
 Unload plist
     ```
-    # # -w flag permanently remove the plist to the Launch Daemon
+    # -w flag permanently remove the plist to the Launch Daemon
     launchctl unload ~/Library/LaunchAgents/com.es.spider6.shoppingadvisor.plist
     ```
 
