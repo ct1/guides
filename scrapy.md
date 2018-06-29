@@ -244,11 +244,13 @@ the plists files are located at
     ```
 
 3. Manage plists
+
 Load plist
     ```
     # -w flag permanently adds the plist to the Launch Daemon
     launchctl load -w ~/Library/LaunchAgents/com.es.spider6.shoppingadvisor.plist
     ```
+
 Unload plist
     ```
     # -w flag permanently remove the plist to the Launch Daemon
