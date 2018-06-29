@@ -84,7 +84,7 @@ Scrapyd-client is a client for scrapyd. Provides the scrapyd-deploy utility to d
 2. Need to define file output name on each project settings
 Output files created on folder data
     ```
-    FEED_URI='/Users/ctavares/Dev/scrapy/data/supercor.json'
+    FEED_URI='/Users/ctavares/Dev/scrapy/data/retailer.json'
     ```
 3. Spiders make no management to backup previous runs. Files management done on scripts
 
@@ -193,6 +193,7 @@ How it works?
     sudo ps -e | grep scrapy
     ```
 
+
 4. Visit http://localhost:6800 host to monitor job progress on spiders execution. Only works for the scrapyd option
 
 
@@ -216,7 +217,7 @@ Spiders sschedule is managed through launchd. Each spider has a .plist file cont
                 <array>
                     <string>/Users/ctavares/Dev/scrapy/launchd_spider.sh</string>
                     <string>es</string>
-                    <string>supercor</string>
+                    <string>retailer</string>
                 </array>
 
             <key>StartCalendarInterval</key>
