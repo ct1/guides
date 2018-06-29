@@ -44,22 +44,15 @@ Scrapy middleware to handle javascript pages using selenium.
     ```
     pip install scrapy-selenium
     ```
-2. In your scrapy project settings file add your browser config
-    ```
-    from shutil import which
 
-    SELENIUM_DRIVER_NAME='chrome'
-    SELENIUM_DRIVER_EXECUTABLE_PATH=which('geckodriver')
-    SELENIUM_DRIVER_ARGUMENTS=['--headless']  # '-headless' if using firefox instead of chrome
-    ```
-3. Add the SeleniumMiddleware to the downloader middlewares:
+2. In your scrapy project settings file add the SeleniumMiddleware to the downloader middlewares:
     ```
     DOWNLOADER_MIDDLEWARES = {
         'scrapy_selenium.SeleniumMiddleware': 800
     }
     ```
 
-4. Usage refer to the scrapy_selenium project [Here](https://github.com/clemfromspace/scrapy-selenium)
+3. Usage refer to the scrapy_selenium project [Here](https://github.com/clemfromspace/scrapy-selenium)
 
 
 ### Deploying - Scrapyd server
