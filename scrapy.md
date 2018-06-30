@@ -2,7 +2,38 @@
 
 ----------
 
-### Rotating proxies
+### How it works
+0. Create scrapy data structure
+1. Create projects. Consider usage of rotating proxies or selenium
+2. Configure projects to generate output file in desired folder
+3. Configure projects to update postgresql
+4. Create script to automate spiders (launchd_spider.sh)
+5. Create plists files for each project to be used by launchd
+6. Launch deamon scrapyd
+7. If scrapyd is not executing when schedule moment arrives, a popup asks if spider is to executed directly out of scrapyd
+
+
+### 0. Scrapy data architecture
+1. Create folder where all projects will seat
+
+    ```
+    mkdir ~/Dev/scrapy
+
+    ```
+2. Create folders by country
+
+    ```
+    cd ~/Dev/scrapy
+    mkdir es
+    mkdir pt
+    mkdir br
+    ```
+
+3. Spiders projects are created within country folders
+4. Automation scripts are in the home scrapy folder
+
+
+### 1A. Rotating proxies
 1. Install scrapy-rotating-proxies module
 ```
 pip install scrapy-rotating-proxies
@@ -26,7 +57,6 @@ If needed, configure maximun retries per request (default=5)
 ROTATING_PROXY_PAGE_RETRY_TIMES = 10
 ```
 
-
 2. Create proxies list
 Use an existing javascript library. Install module globally via npm
     ```
@@ -37,7 +67,7 @@ Create file 'proxies.txt' in current directory
     proxy-lists getProxies --sources-white-list="gatherproxy,sockslist"
     ```
 
-### Scrapy with selenium
+### 1B. Scrapy with selenium
 Scrapy middleware to handle javascript pages using selenium.
 
 1. Installation
@@ -55,34 +85,63 @@ Scrapy middleware to handle javascript pages using selenium.
 3. Usage refer to the scrapy_selenium project [Here](https://github.com/clemfromspace/scrapy-selenium)
 
 
-### Deploying - Scrapyd server
-Scrapyd is a service for running Scrapy spiders on a server.
-1. Installation
-    ```
-    pip install scrapyid
-    ```
-Must be always running.
-
-### Deploying - Scrapyd-client
-Scrapyd-client is a client for scrapyd. Provides the scrapyd-deploy utility to deploy projects to scrapyd server.
-
-1. Scrapyd-client installation
-    ```
-    pip install scrapyid-client
-    ```
-
-### Deploying - setup to deploy
-
-1. Don't need to create scrapyd.cfg. Scrapyd defaults are fine
-2. Need to define file output name on each project settings
-Output files created on folder data
+### 2. Configure scrapy output files
+1. In your scrapy project settings file add configuration for output file
     ```
     FEED_URI='/Users/ctavares/Dev/scrapy/data/retailer.json'
     ```
-3. Spiders make no management to backup previous runs. Files management done on scripts
 
-### Deploying - spider tasks script
-Script makes file-backup management on previous runs, cleans unnecessary scrapy files (backup/eggs), and launches spider curl processes.
+### 3. Scrapy with postgresql
+
+1. In your scrapy project pipelines file add configuration
+    ```
+    import psycopg2
+    import datetime as dt
+
+    class ProjectPipeline(object):
+
+        retailer = 'your__retailer'
+
+        def open_spider(self, spider):
+            hostname = 'xxx'
+            database = 'xxx'
+            username = 'xxx'
+            password = 'xxx'
+            self.connection = psycopg2.connect(host=hostname, user=username, password=password, dbname=database)
+            self.cur = self.connection.cursor()
+            # retrieve retailer id
+            sql = "SELECT id FROM shared_retailer WHERE name = '{}'".format(self.retailer)
+            self.cur.execute(sql)
+            self.retailer_id = self.cur.fetchone()[0]
+            # delete for this retailer
+            sql = "DELETE FROM shared_xxx WHERE retailer_id={}".format(self.retailer_id)
+            self.cur.execute(sql)
+            self.connection.commit()
+
+        def close_spider(self, spider):
+            self.cur.close()
+            self.connection.close()
+
+        def process_item(self, item, spider):
+            self.cur.execute("INSERT INTO shared_xxx(fields, ...) \
+                VALUES (%s, %s, %s, %s, ...)", \
+                (dt.date.today(), item['field1'], \
+                float(item['field2']), int(self.retailer_id)), ... );
+            self.connection.commit()
+            return item
+    ```
+
+2. In your scrapy project settings uncomment configuration
+    ```
+    ITEM_PIPELINES = {
+        'retailer.pipelines.RetailerPipeline': 300,
+    }
+    ```
+
+### 4. Spider script
+
+Create script file 'launchd_spider.sh' in ths scrapy home directory.
+
     ```
     #!/bin/bash
 
@@ -174,29 +233,12 @@ Ensure that the script is executable
     chmod +x ~/Dev/scrapy/launchd_spider.sh
     ```
 
-How it works?
-- If scrapyd running a deamon process for the spider project is launched.
+### 5. Launchd plists
 
-- If scrapyd is not running a popup is launched. Possibilities are:
-
-    1) launch scrapyid in a terminal session and reply Repeat. the script validates that now srapyd is running and launch the deamon process for spider.
-
-    2) execute scrapy in background without scrapyid. Confirm porcess is running with:
-    ```
-    sudo ps -e | grep scrapy
-    ```
-
-
-4. Visit http://localhost:6800 host to monitor job progress on spiders execution. Only works for the scrapyd option
-
-
-### Deploying - Spider scheduler
-
-Spiders sschedule is managed through launchd. Each spider has a .plist file controlling it's schedule launch.
+.plist file controls schedule launch.
 
 1. Each spider is launched on a different day-of-the-week/hour
 
-.plist file example
     ```
     <?xml version="1.0" encoding="UTF-8"?>
     <!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
@@ -204,7 +246,7 @@ Spiders sschedule is managed through launchd. Each spider has a .plist file cont
         <dict>
 
             <key>Label</key>
-                <string>com.es.spider6.shoppingadvisor</string>
+                <string>com.es.spider1.shoppingadvisor</string>
 
             <key>ProgramArguments</key>
                 <array>
@@ -252,6 +294,25 @@ Unload plist
     # -w flag permanently remove the plist to the Launch Daemon
     launchctl unload ~/Library/LaunchAgents/com.es.spider6.shoppingadvisor.plist
 ```
+
+### 6. Scrapyd server
+Scrapyd is a service for running Scrapy spiders on a server.
+1. Installation
+    ```
+    pip install scrapyid
+    ```
+Must be always running.
+
+### 6A. Scrapyd-client
+Scrapyd-client is a client for scrapyd. Provides the scrapyd-deploy utility to deploy projects to scrapyd server.
+
+1. Scrapyd-client installation
+    ```
+    pip install scrapyid-client
+    ```
+
+2. Visit http://localhost:6800 host to monitor job progress on spiders execution. Only works for the scrapyd option
+
 
 
 ### Project references
