@@ -97,6 +97,13 @@ If local files are present, django uses them for settings. Otherwise it uses pro
 rm /var/www/<projname>/src/django_proj/settings/local*
 ``` 
 
+### 7. Manage.py loads production and not local 
+Need to change manage.py to load prodcution and not development mode. Execute script
+```
+cd /var/www/<projname>/src
+./to_production.sh
+``` 
+
 
 ### NOTE: Alternatively, you can FTP your local django project to Digital Ocean
 

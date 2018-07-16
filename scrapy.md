@@ -137,6 +137,8 @@ Scrapy middleware to handle javascript pages using selenium.
         'retailer.pipelines.RetailerPipeline': 300,
     }
     ```
+3. This postgresql interface only allow for one connection at a time. New connections close previous connection if existed
+
 
 ### 4. Spider script
 
