@@ -45,7 +45,10 @@ After database import, media files have to be collected manually
   ``` 
 Ensure media folder is included in apache configuration file
 
-### 5. Restart apache2
+### 5. Manually install redis
+Follow digital ocean procedure to install redis
+
+### 6. Restart apache2
   ```
   sudo service apache2 restart
   ``` 

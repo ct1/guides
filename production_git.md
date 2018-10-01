@@ -66,6 +66,8 @@ chmod +x post-receive
 ``` 
 The 'post-receive' file will be looked into every time a push is completed and it's saying that your files need to be in /var/www/<your-dir>.
 
+Ensure that the target directory is created, git won't create the destiny tree
+
 
 ### 3. Add remote-repository localy
 Now add this bare repository to your local system as a remote ideintified by `production`. It can also be called `staging` or `live` or `test` or ... depending on your configuration.
