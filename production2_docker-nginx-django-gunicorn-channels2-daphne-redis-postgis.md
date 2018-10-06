@@ -7,16 +7,16 @@ Document strucuture
 ├── .env                            # variables for all environments
 ├── .env.dev                        # variables for development only
 ├── .env.prod                       # variables for production only
-├── .git                            # git repo generated from this level
-├── .gitignore
-├── docker-compose.yml              # production
-├── docker-compose.override.yml     # development
-├── nginx                           # config web server -> production
-│   ├── Dockerfile
-│   └── nginx.conf
 ├── scripts
 │   ├── init_docker_postgres.sh     # initial populate DB for testing environment
 │   └── ...
+├── docker-compose.yml              # production
+├── docker-compose.override.yml     # development
+├── .git                            # git repo generated from this level
+├── .gitignore
+├── nginx                           # config web server -> production
+│   ├── Dockerfile
+│   └── nginx.conf
 └── src
     ├── Dockerfile
     ├── django_proj
