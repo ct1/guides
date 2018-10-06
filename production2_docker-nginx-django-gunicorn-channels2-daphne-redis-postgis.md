@@ -3,7 +3,7 @@
 Document strucuture
 
 .
-├── .env
+├── .env\n
 ├── .env.dev
 ├── .env.prod
 ├── .git
