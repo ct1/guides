@@ -3,10 +3,10 @@
 Document strucuture
 
 .
-|-- .env
-|-- .env.dev
-|── .env.prod
-|── .git
++-- .env
++-- .env.dev
++-- .env.prod
++-- .git
 |── .gitignore
 |── docker-compose.yml 				# production
 |── docker-compose.override.yml 	# development
