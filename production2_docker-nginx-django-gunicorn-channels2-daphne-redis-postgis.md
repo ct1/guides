@@ -9,20 +9,20 @@ Document strucuture
 ├── .env.prod
 ├── .git
 ├── .gitignore
-├── docker-compose.yml 				# production
-├── docker-compose.override.yml 	# development
-├── nginx 							# config web server -> production
+├── docker-compose.yml              # production
+├── docker-compose.override.yml     # development
+├── nginx                           # config web server -> production
 │   ├── Dockerfile
 │   └── nginx.conf
 ├── ...
 └── src
     ├── Dockerfile
     ├── django_proj
-    │   ├── asgi.py 				# communication file for channels2 
+    │   ├── asgi.py                 # communication file for channels2 
     │   ├── routing.py
     │   ├── settings.py
     │   ├── urls.py
-    │   ├── wsgi.py.py 				# communication file for django http
+    │   ├── wsgi.py.py              # communication file for django http
     │   └── ...
     ├── manage.py
     ├── requirements.txt
