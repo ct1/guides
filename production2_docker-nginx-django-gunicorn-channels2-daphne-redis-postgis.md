@@ -4,10 +4,10 @@ Document strucuture
 
 ```
 .
-├── .env
-├── .env.dev
-├── .env.prod
-├── .git
+├── .env                            # variables for all environments
+├── .env.dev                        # variables for development only
+├── .env.prod                       # variables for production only
+├── .git                            # git repo generated from this level
 ├── .gitignore
 ├── docker-compose.yml              # production
 ├── docker-compose.override.yml     # development
@@ -19,7 +19,7 @@ Document strucuture
     ├── Dockerfile
     ├── django_proj
     │   ├── asgi.py                 # communication file for channels2 
-    │   ├── routing.py
+    │   ├── routing.py              # 'urls.py equivalent' for channels
     │   ├── settings.py
     │   ├── urls.py
     │   ├── wsgi.py.py              # communication file for django http
