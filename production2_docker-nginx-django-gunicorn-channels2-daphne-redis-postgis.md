@@ -3,8 +3,8 @@
 Document strucuture
 
 .
-|── .env
-|── .env.dev
+|-- .env
+|-- .env.dev
 |── .env.prod
 |── .git
 |── .gitignore
