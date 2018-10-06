@@ -32,7 +32,7 @@ Document strucuture
     └── ...
 ```
 
-The structure include .env files and scripts folder used to control the distinct docker environments, version control files (.git) to manage package at this docker level (vs django level), nginx folder with configuration files, and src with django channels2 app
+The structure includes .env files, scripts folder and docker-compose files used to control the distinct docker environments. Then, includes version control files (.git -> manage pack at docker level vs django level), nginx folder with its configuration files, and src folder with the django channels2 app
 
 ----------
 
