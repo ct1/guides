@@ -3,7 +3,6 @@
 Document strucuture
 
 ```
-
 .
 ├── .env
 ├── .env.dev
