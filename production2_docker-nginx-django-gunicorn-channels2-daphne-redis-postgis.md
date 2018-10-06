@@ -1,4 +1,4 @@
-# Production setup for django, gunicorn, channels2, daphne, redis, postgis, nginx using Docker
+# Production setup for django, gunicorn, channels2, daphne, redis, postgis and nginx using Docker
 
 Document strucuture
 
@@ -34,19 +34,24 @@ Document strucuture
 
 We use different docker structures for development and production.
 In development we use daphne to handle all django requests.
-In production, HTTP requests go through gunicorn and channels requests (websockets) go through daphne. Production uses a proxy server for static requests and pass all other requests to gunicorn and daphne
 
+```
 Development (docker-compose.override.yml)
 ├── db
 ├── redis
 └── web
+```
 
+In production, HTTP requests go through gunicorn and channels requests (websockets) go through daphne. Production uses a proxy server for static requests and pass all other requests to gunicorn and daphne
+
+```
 Production (docker-compose.yml)
 ├── channels
 ├── db
 ├── redis
 ├── nginx
 └── web
+```
 
 When docker-compose is executed, if it finds an override version of compose.yaml it merges docker-compose.yaml with docker-compose.override.yaml
 In production we have only docker-compose.yml (default environment) and in developments we have both docker-compose.yaml and docker-compose.override.yaml (development overrides production). This way we use the same command for both production adn development
