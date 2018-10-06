@@ -92,7 +92,6 @@ common docker-compose structure
 version: '3'
 
 services:
-  # backing store for the channel layer
   redis:
     image: redis:latest
     command: redis-server
@@ -103,11 +102,10 @@ services:
     image: mdillon/postgis:9.6
     environment:
       - POSTGRES_DB=POSTGRES_DB
-      - POSTGRES_USER=advisoruser
-      - POSTGRES_PASSWORD=advisoruser_pswd
-      #- PGDATA=/var/lib/postgresql/pgdata
+      - POSTGRES_USER=POSTGRES_USER
+      - POSTGRES_PASSWORD=POSTGRES_PASSWORD
     volumes:
-      # if we remove the container the data is not lost. Create side-db called db_data
+	 db_data
       - db_data:/var/lib/postgresql/pgdata
     env_file:
       - ./src/.env
@@ -147,49 +145,49 @@ version: '3'
 
 services:
   web:
-    # web service is built from Dockerfile in the folder src
     build: ./src
-
     env_file:
+      - ./src/.env
       - ./src/.env.prod
-
     command: >
       bash -c "python manage.py makemigrations
       && python manage.py migrate
       && gunicorn -c gunicorn.conf django_proj.wsgi"
-
-    # synchronize container folders with disk folders
     volumes: 
-      # every change produced in the container is synchronized with disk
       - ./src:/src
-
     ports:
-      # match container with disk-app port
       - "8000:8000"
-
     depends_on:
       - db
 
   channels:
     build: ./src
-    # execute daphne using asgi.py
     command: daphne -b 0.0.0.0 -p 8001 django_proj.asgi:application -v2
-
     volumes: 
-      # every change produced in the container is synchronized with disk
       - ./src:/src
     ports:
-      # match container with disk-app port
       - "8001:8001"
-
     env_file:
+      - ./src/.env
       - ./src/.env.prod
-
     links:
       - redis
 
+  db:
+    build: ./postgres
+    environment:
+      - POSTGRES_DB=POSTGRES_DB
+      - POSTGRES_USER=POSTGRES_USER
+      - POSTGRES_PASSWORD=POSTGRES_PASSWORD
+    volumes:
+	db_data
+      - db_data:/var/lib/postgresql/pgdata
+    env_file:
+      - ./src/.env
+    ports:
+      - '5434:5432'
+
   nginx:
-    # web service is built from Dockerfile existing in the folder nginx
     build: ./nginx
     depends_on:
       - web
@@ -197,7 +195,6 @@ services:
     ports:
       - "80:80"
     volumes:
-      # sync disk folder with container folder
       - ./src/static:/var/www/static
       - ./src/media:/var/www/media
     depends_on:
@@ -205,7 +202,7 @@ services:
       - channels
 ```
 
-Two services to handle django servers (gunicorn and daphne) and the nginx service to proxy the django services.
+Two services to handle django servers (gunicorn and daphne), the nginx service to proxy the django services, and the postgres service as previously explained but her built from a Dockerfile to perform initial population of the database.
 
 The web service manages the HTTP requests proxied by nginx.
 Tis container runs the gunicorn server. It communicates with django via the wsgi protocol (django_proj.wsgi.py file)
@@ -323,6 +320,35 @@ The we configure statics and media, which are served directly by nginx. The dire
 The requests starting by '/ws/' are passed to dpahne. The remaining requests are passed to gunicorn.
 In this lat two cases the proxy_pass uses the http protocol (dont'comunicate through socket files as in the unix protocol) calling the docker service by it's name and port. In the docker-compose file we have defined as port for daphne 8001 and defined 8000 for gunicorn. The rest of the directives, are standard directives for websockets in the case of daphne, and standar diretcives of http for the case of gunicorn
 
+The postgres Dockerfile directives:
+```
+FROM mdillon/postgis:9.6
+COPY ./src/py/dbexport.pgsql /tmp/psql_data
+COPY ./postgres/init_docker_postgres.sh /docker-entrypoint-initdb.d/
+```
+
+
+The postgres initialization script (init_docker_postgres.sh)
+```
+#!/bin/bash
+DATABASE_NAME="advisor"
+DATABASE_USER=<my_advisor_user>
+DB_DUMP_LOCATION="/tmp/psql_data/dbexport.pgsql"
+
+echo "*** CREATING DATABASE ***"
+
+# create default database
+gosu postgres postgres --single <<EOSQL
+	dropdb "$DATABASE_NAME";
+	createdb -T template0 "$DATABASE_NAME";
+	GRANT ALL PRIVILEGES ON DATABASE "$DATABASE_NAME" TO "$DATABASE_USER";
+	psql "$DATABASE_NAME" < "$DB_DUMP_LOCATION";
+EOSQL
+
+echo "*** DATABASE CREATED! ***"
+```
+
+
 
 ### Development settings
 
@@ -342,16 +368,13 @@ version: '3'
 services:
   web:
     build: ./src
-    # execute daphne using asgi.py
     command: >
       bash -c "python manage.py makemigrations
       && python manage.py migrate
       && daphne -b 0.0.0.0 -p 8000 django_proj.asgi:application -v2
     volumes: 
-      # every change produced in the container is synchronized with disk
       - ./src:/src
     ports:
-      # match container with disk-app port
       - "8000:8000"
     env_file:
       - ./src/.env.dev
@@ -360,7 +383,6 @@ services:
     depends_on:
       - db
     ports:
-      # match container with disk-app port
       - "8000:8000"
 ```
 
