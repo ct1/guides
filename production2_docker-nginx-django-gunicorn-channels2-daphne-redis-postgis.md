@@ -1,4 +1,4 @@
-# Production setup using Docker, django, gunicorn, channels2, daphne, redis, postgis, nginx
+# Production setup for django, gunicorn, channels2, daphne, redis, postgis, nginx using Docker
 
 Document strucuture
 
