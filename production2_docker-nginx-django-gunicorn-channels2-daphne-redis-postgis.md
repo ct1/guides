@@ -3,18 +3,18 @@
 Document strucuture
 
 .
-├── .env\n
-├── .env.dev
-├── .env.prod
-├── .git
-├── .gitignore
-├── docker-compose.yml 				# production
-├── docker-compose.override.yml 	# development
-├── nginx 							# config web server -> production
-│   ├── Dockerfile
-│   └── nginx.conf
-├── ...
-└── src
+|── .env
+|── .env.dev
+|── .env.prod
+|── .git
+|── .gitignore
+|── docker-compose.yml 				# production
+|── docker-compose.override.yml 	# development
+|── nginx 							# config web server -> production
+|   |── Dockerfile
+│   |── nginx.conf
+|── ...
+|── src
     ├── Dockerfile
     ├── django_proj
     │   ├── asgi.py 				# communication file for channels2 
