@@ -38,8 +38,8 @@ Then, includes version control files (.git -> manage pack at docker level vs dja
 
 ----------
 
-We use different docker structures for development and production.
-In development we use daphne to handle all django requests.
+We use different container structures for development and production.
+In development we use daphne to handle all django requests. We use 3 containers
 
 ```
 Development (docker-compose.override.yml)
@@ -48,7 +48,7 @@ Development (docker-compose.override.yml)
 └── web
 ```
 
-In production, HTTP requests go through gunicorn and channels requests (websockets) go through daphne. Production uses a proxy server for static requests and pass all other requests to gunicorn and daphne
+In production, we use nginx as proxy server to serve static files and ditribute HTTP requests to gunicorn and websocket requests to daphne. We use 5 containers 
 
 ```
 Production (docker-compose.yml)
@@ -60,16 +60,18 @@ Production (docker-compose.yml)
 ```
 
 When docker-compose is executed, if it finds an override version of compose.yaml it merges docker-compose.yaml with docker-compose.override.yaml
+
 In production we have only docker-compose.yml (default environment) and in developments we have both docker-compose.yaml and docker-compose.override.yaml (development overrides production). This way we use the same command for both production adn development
 
 ```
 docker-compose up 
 ```
 
-If we had other environments, such as staging, we would use the command:
+If we had other environments, such as staging, we would need additional compose .yaml files and we would use the command:
 ```
 docker.compose -f docker-compose.yaml -f docker-compose.staging.yaml up
 ```
+
 
 ### Common settings to production and development
 .env file contains environment variables shared by many systems and scripts
@@ -114,7 +116,6 @@ services:
 volumes:
   db_data:
 ```
-
 
 
 ### Production settings
