@@ -14,7 +14,9 @@ Document strucuture
 ├── nginx                           # config web server -> production
 │   ├── Dockerfile
 │   └── nginx.conf
-├── ...
+├── scripts
+│   ├── init_docker_postgres.sh     # initial populate DB for testing environment
+│   └── ...
 └── src
     ├── Dockerfile
     ├── django_proj
