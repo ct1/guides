@@ -2,6 +2,7 @@
 
 Document strucuture
 
+```
 .
 +-- .env
 +-- .env.dev
@@ -27,6 +28,7 @@ Document strucuture
     ├── requirements.txt
     ├── static
     └── ...
+```
 
 ----------
 
