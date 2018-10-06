@@ -7,9 +7,6 @@ Document strucuture
 ├── .env                            # variables for all environments
 ├── .env.dev                        # variables for development only
 ├── .env.prod                       # variables for production only
-├── scripts
-│   ├── init_docker_postgres.sh     # initial populate DB for testing environment
-│   └── ...
 ├── docker-compose.yml              # production
 ├── docker-compose.override.yml     # development
 ├── .git                            # git repo generated from this level
@@ -17,6 +14,9 @@ Document strucuture
 ├── nginx                           # config web server -> production
 │   ├── Dockerfile
 │   └── nginx.conf
+├── postgres
+│   ├── Dockerfile
+│   ├── init_docker_postgres.sh     # initial populate DB for testing environment
 └── src
     ├── Dockerfile
     ├── django_proj
@@ -32,9 +32,9 @@ Document strucuture
     └── ...
 ```
 
-The structure includes .env files, scripts folder and docker-compose files used to control the distinct docker environments.
+The structure includes .env files and docker-compose files used to control the distinct docker environments.
 
-Then, includes version control files (.git -> manage pack at docker level vs django level), nginx folder with its configuration files, and src folder with the django channels2 app
+Then, includes version control files (.git -> manage pack at docker level vs django level), nginx folder with its configuration files, postgres folder with initalization script (production only) and src folder with the django channels2 app
 
 ----------
 
@@ -123,8 +123,8 @@ volumes:
 
 ```
 DEBUG = False
-SECRET_KEY=uv78bkpdd!6&wl$x1!gsz^ph+_v858($p^#jaud%j$t9cg1elf
-ALLOWED_HOSTS=xx.101.85.xx
+SECRET_KEY=uv78bkpdd!6&wl$x1!gsz^ph+_v858:$p^#jaud%j$t9cg1elf  (just an example)
+ALLOWED_HOSTS=xx.101.85.xx   (replace by the web server IP ADDRESS)
 ```
 
 docker-compose structure
@@ -197,8 +197,8 @@ services:
 
 ```
 DEBUG = True
-SECRET_KEY=ksbwxbmi%f1%kc=zkljpuxtc6i4dyq2j-%2%un##oh+9$-o*m3
-ALLOWED_HOSTS=*
+SECRET_KEY=ksbwxbmi%f1%kc=zkljpuxtc6i4dyq2j-%2%un##oh+9$-o*m3   (an example)
+ALLOWED_HOSTS=*         (list of localshost, lan IP's, ...)
 ```
 
 docker-compose structure
